@@ -2,6 +2,7 @@ package keepalive
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/zdnscloud/cement/log"
@@ -15,21 +16,24 @@ import (
 var GIsRunning = true
 
 func New(conn *grpc.ClientConn, conf *config.MonitorConfig) error {
-	time.Sleep(time.Second * time.Duration(conf.Server.ProbeInterval))
 	cli := pb.NewMonitorManagerClient(conn)
 	for GIsRunning {
-		cpuUsage, memUsate, err := metric.New(conf)
+		cpuUsage, memUsage, err := metric.New(conf)
 		if err != nil {
 			log.Errorf("get metric failed: %s", err.Error())
+			continue
 		}
 		var target pb.KeepAliveReq
 		target.IP = conf.Server.IP
 		target.Role = conf.Server.Role
-		target.CpuUsage = float32(*cpuUsage)
-		target.MemUsage = float32(*memUsate)
+		fmt.Println("cpu,mem:", cpuUsage, memUsage)
+		target.CpuUsage = *cpuUsage
+		target.MemUsage = *memUsage
 		if Resp, err := cli.KeepAlive(context.Background(), &target); err != nil {
 			log.Errorf("grpc client exec KeepAliveReq failed: %s,%s", Resp.Msg, err.Error())
+			continue
 		}
+		time.Sleep(time.Second * time.Duration(conf.Server.ProbeInterval))
 	}
 	return nil
 }

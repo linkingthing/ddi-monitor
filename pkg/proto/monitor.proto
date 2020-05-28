@@ -21,8 +21,8 @@ message RegisterResp{
 message KeepAliveReq{
 string iP = 1;
 repeated string role = 2;
-float cpuUsage = 3;
-float memUsage = 4;
+string cpuUsage = 3;
+string memUsage = 4;
 }
 
 message KeepAliveResp{
