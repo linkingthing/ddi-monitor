@@ -1,3 +1,10 @@
 module github.com/linkingthing/ddi-monitor
 
 go 1.13
+
+require (
+	github.com/golang/protobuf v1.4.2
+	github.com/zdnscloud/cement v0.0.0-20200503120134-aa381f4206fe
+	google.golang.org/grpc v1.29.1
+	google.golang.org/protobuf v1.24.0
+)

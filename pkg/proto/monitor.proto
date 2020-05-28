@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package proto;
+
+service MonitorManager{
+rpc Register(RegisterReq) returns (RegisterResp){}
+rpc KeepAlive(KeepAliveReq) returns (KeepAliveResp){}
+}
+
+message RegisterReq{
+	string iP = 1;
+	string hostName = 2;
+	repeated string role = 3;
+}
+
+message RegisterResp{
+	bool success = 1;
+	string msg = 2;
+}
+
+message KeepAliveReq{
+string iP = 1;
+repeated string role = 2;
+float cpuUsage = 3;
+float memUsage = 4;
+}
+
+message KeepAliveResp{
+	bool success = 1;
+	string msg = 2;
+}
