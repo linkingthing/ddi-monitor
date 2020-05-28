@@ -23,6 +23,8 @@ string iP = 1;
 repeated string role = 2;
 string cpuUsage = 3;
 string memUsage = 4;
+bool dnsAlive = 5;
+bool dhcpAlive = 6;
 }
 
 message KeepAliveResp{
