@@ -2,7 +2,6 @@ package keepalive
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/zdnscloud/cement/log"
@@ -26,7 +25,6 @@ func New(conn *grpc.ClientConn, conf *config.MonitorConfig) error {
 		var req pb.KeepAliveReq
 		req.IP = conf.Server.IP
 		req.Roles = conf.Server.Roles
-		fmt.Println("cpu,mem:", cpuUsage, memUsage)
 		req.CpuUsage = *cpuUsage
 		req.MemUsage = *memUsage
 		req.DnsAlive = true

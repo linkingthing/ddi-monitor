@@ -95,7 +95,6 @@ func getUsage(body []byte) (*string, error) {
 		return nil, err
 	}
 	for _, v := range rsp.Data.Result {
-		fmt.Println("values:", v.Values)
 		if len(v.Values) >= 1 {
 			tmp := v.Values[0][1].(string)
 			return &tmp, nil
