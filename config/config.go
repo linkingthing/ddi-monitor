@@ -14,7 +14,7 @@ type MonitorConfig struct {
 type ServerConf struct {
 	IP            string   `yaml:"ip"`
 	HostName      string   `yaml:"hostname"`
-	Role          []string `yaml:"role"`
+	Roles         []string `yaml:"roles"`
 	ProbeInterval uint     `yaml:"probe_interval"`
 }
 

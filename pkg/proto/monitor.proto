@@ -10,7 +10,7 @@ rpc KeepAlive(KeepAliveReq) returns (KeepAliveResp){}
 message RegisterReq{
 	string iP = 1;
 	string hostName = 2;
-	repeated string role = 3;
+	repeated string roles = 3;
 }
 
 message RegisterResp{
@@ -20,7 +20,7 @@ message RegisterResp{
 
 message KeepAliveReq{
 string iP = 1;
-repeated string role = 2;
+repeated string roles = 2;
 string cpuUsage = 3;
 string memUsage = 4;
 bool dnsAlive = 5;

@@ -25,7 +25,7 @@ func New(conn *grpc.ClientConn, conf *config.MonitorConfig) error {
 		}
 		var target pb.KeepAliveReq
 		target.IP = conf.Server.IP
-		target.Role = conf.Server.Role
+		target.Roles = conf.Server.Roles
 		fmt.Println("cpu,mem:", cpuUsage, memUsage)
 		target.CpuUsage = *cpuUsage
 		target.MemUsage = *memUsage
