@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 
 	"github.com/zdnscloud/cement/log"
 	"google.golang.org/grpc"
@@ -26,7 +25,6 @@ func main() {
 		log.Fatalf("load config file failed: %s", err.Error())
 	}
 
-	fmt.Println("1111", conf)
 	conn, err := grpc.Dial(conf.ControllerAddr, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("dial grpc server failed: %s", err.Error())
