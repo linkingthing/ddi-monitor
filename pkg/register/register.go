@@ -12,13 +12,14 @@ import (
 
 func New(conn *grpc.ClientConn, conf *config.MonitorConfig) error {
 	cli := pb.NewMonitorManagerClient(conn)
-	var target pb.RegisterReq
-	target.IP = conf.Server.IP
-	target.HostName = conf.Server.HostName
+	var req pb.RegisterReq
+	req.IP = conf.Server.IP
+	req.HostName = conf.Server.HostName
+	req.IsSlave = false
 	for _, v := range conf.Server.Roles {
-		target.Roles = append(target.Roles, v)
+		req.Roles = append(req.Roles, v)
 	}
-	if _, err := cli.Register(context.Background(), &target); err != nil {
+	if _, err := cli.Register(context.Background(), &req); err != nil {
 		log.Errorf("grpc client exec Register failed: %s", err.Error())
 		return err
 	}
