@@ -31,7 +31,6 @@ func New(conn *grpc.ClientConn, conf *config.MonitorConfig) error {
 		req.Roles = conf.Server.Roles
 		req.DnsAlive = true
 		req.DhcpAlive = true
-		req.IsSlave = false
 		if Resp, err := cli.KeepAlive(context.Background(), &req); err != nil {
 			log.Errorf("grpc client exec KeepAliveReq failed: %s,%s", Resp.Msg, err.Error())
 			continue
