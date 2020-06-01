@@ -8,6 +8,7 @@ import (
 
 	"github.com/linkingthing/ddi-monitor/config"
 	"github.com/linkingthing/ddi-monitor/pkg/keepalive"
+	"github.com/linkingthing/ddi-monitor/pkg/metric/exporter"
 	"github.com/linkingthing/ddi-monitor/pkg/register"
 )
 
@@ -16,7 +17,7 @@ var (
 )
 
 func main() {
-	flag.StringVar(&configFile, "c", "ddi-monitor.conf", "configure file path")
+	flag.StringVar(&configFile, "c", "ddi-monitor.config", "configure file path")
 	flag.Parse()
 
 	log.InitLogger(log.Debug)
@@ -31,6 +32,7 @@ func main() {
 	}
 	defer conn.Close()
 
-	register.New(conn, conf)
+	register.Register(conn, conf)
+	go exporter.NodeExporter(conf)
 	keepalive.New(conn, conf)
 }

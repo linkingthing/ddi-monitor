@@ -8,7 +8,7 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/linkingthing/ddi-monitor/config"
-	"github.com/linkingthing/ddi-monitor/pkg/metric"
+	"github.com/linkingthing/ddi-monitor/pkg/metric/importer"
 	pb "github.com/linkingthing/ddi-monitor/pkg/proto"
 )
 
@@ -17,16 +17,18 @@ var GIsRunning = true
 func New(conn *grpc.ClientConn, conf *config.MonitorConfig) error {
 	cli := pb.NewMonitorManagerClient(conn)
 	for GIsRunning {
-		cpuUsage, memUsage, err := metric.New(conf)
-		if err != nil {
-			log.Errorf("get metric failed: %s", err.Error())
-			continue
-		}
 		var req pb.KeepAliveReq
+		cpuUsage, memUsage, err := importer.New(conf)
+		if err != nil {
+			log.Errorf("get metric from importer failed: %s", err.Error())
+			req.CpuUsage = "0"
+			req.MemUsage = "0"
+		} else {
+			req.CpuUsage = cpuUsage
+			req.MemUsage = memUsage
+		}
 		req.IP = conf.Server.IP
 		req.Roles = conf.Server.Roles
-		req.CpuUsage = *cpuUsage
-		req.MemUsage = *memUsage
 		req.DnsAlive = true
 		req.DhcpAlive = true
 		req.IsSlave = false

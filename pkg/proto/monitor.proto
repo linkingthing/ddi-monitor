@@ -11,7 +11,8 @@ message RegisterReq{
 	string iP = 1;
 	string hostName = 2;
 	repeated string roles = 3;
-	bool isSlave = 4;
+	string master = 4;
+	string controllerIP = 5;
 }
 
 message RegisterResp{
@@ -26,7 +27,8 @@ string cpuUsage = 3;
 string memUsage = 4;
 bool dnsAlive = 5;
 bool dhcpAlive = 6;
-bool isSlave = 7;
+string Master = 7;
+string controllerIP = 8;
 }
 
 message KeepAliveResp{

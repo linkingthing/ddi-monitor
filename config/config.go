@@ -16,6 +16,7 @@ type ServerConf struct {
 	HostName      string   `yaml:"hostname"`
 	Roles         []string `yaml:"roles"`
 	ProbeInterval uint     `yaml:"probe_interval"`
+	ExporterPort  string   `yaml:"exporter_port"`
 }
 
 type PrometheusConf struct {
