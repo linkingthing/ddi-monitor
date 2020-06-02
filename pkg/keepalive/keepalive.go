@@ -18,7 +18,7 @@ func New(conn *grpc.ClientConn, conf *config.MonitorConfig) error {
 	cli := pb.NewMonitorManagerClient(conn)
 	for GIsRunning {
 		var req pb.KeepAliveReq
-		cpuUsage, memUsage, err := importer.New(conf)
+		cpuUsage, memUsage, err := importer.GetMetric(conf)
 		if err != nil {
 			log.Errorf("get metric from importer failed: %s", err.Error())
 			req.CpuUsage = "0"

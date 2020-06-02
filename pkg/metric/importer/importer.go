@@ -44,7 +44,7 @@ type Response struct {
 	Data   Data
 }
 
-func New(conf *config.MonitorConfig) (string, string, error) {
+func GetMetric(conf *config.MonitorConfig) (string, string, error) {
 	cpuPQL := "100 - (avg(irate(node_cpu_seconds_total{instance=\"" + conf.Server.IP + ":" + physicalExportPort + "\", mode=\"idle\"}[5m])) by (instance) * 100)"
 	memPQL := "(node_memory_MemFree_bytes{instance=\"" + conf.Server.IP + ":" + physicalExportPort + "\"}+node_memory_Cached_bytes{instance=\"" +
 		conf.Server.IP + ":" + physicalExportPort + "\"}+node_memory_Buffers_bytes{instance=\"" + conf.Server.IP + ":" + physicalExportPort + "\"}) / node_memory_MemTotal_bytes * 100"
@@ -106,6 +106,9 @@ func getUsage(body []byte) (string, error) {
 	for _, v := range rsp.Data.Result {
 		if len(v.Values) >= 1 {
 			tmp := v.Values[0][1].(string)
+			if f, err := strconv.ParseFloat(tmp, 64); err == nil {
+				tmp = fmt.Sprintf("%.2f", f)
+			}
 			return tmp, nil
 		}
 	}
