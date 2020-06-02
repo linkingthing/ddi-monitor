@@ -25,19 +25,16 @@ type Metric struct {
 	Job      string
 }
 
-type ValueIntf [2]interface {
-}
-type ValueIntfOne interface {
+type ValueIntf []interface {
 }
 
-type Result struct {
+type ResultData struct {
 	Metric Metric
-	Value  []ValueIntfOne
 	Values []ValueIntf
 }
 type Data struct {
 	ResultType string
-	Result     []Result
+	Result     []ResultData
 }
 type Response struct {
 	Status string
@@ -92,8 +89,6 @@ func getUsage(body []byte) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	fmt.Println("rsp", rsp)
-	//fmt.Println("rsp", rsp.Data.Result.values)
 	d := json.NewDecoder(bytes.NewReader(body))
 	d.UseNumber()
 	if err := d.Decode(&rsp); err != nil {
@@ -103,13 +98,15 @@ func getUsage(body []byte) (string, error) {
 	if rsp.Status != STATUS_SUCCCESS {
 		return "", err
 	}
-	for _, v := range rsp.Data.Result {
-		if len(v.Values) >= 1 {
-			tmp := v.Values[0][1].(string)
-			if f, err := strconv.ParseFloat(tmp, 64); err == nil {
-				tmp = fmt.Sprintf("%.2f", f)
+	for _, r := range rsp.Data.Result {
+		for _, vs := range r.Values {
+			for _, v := range vs {
+				if t, ok := v.(string); ok {
+					if f, err := strconv.ParseFloat(t, 64); err == nil {
+						return fmt.Sprintf("%.2f", f), nil
+					}
+				}
 			}
-			return tmp, nil
 		}
 	}
 	return "", fmt.Errorf("not found")
