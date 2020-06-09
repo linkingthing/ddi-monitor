@@ -72,10 +72,10 @@ func getCurrentMetric(conf *config.MonitorConfig, pql string) ([]byte, error) {
 	param.Add("step", "20")
 	path := schema + conf.Prometheus.Addr + "/api/v1/query_range?" + param.Encode()
 	resp, err := http.Get(path)
-	defer resp.Body.Close()
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err

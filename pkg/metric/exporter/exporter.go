@@ -146,7 +146,6 @@ func NodeExporter(conf *config.MonitorConfig) {
 	flag.AddFlags(kingpin.CommandLine, promlogConfig)
 	kingpin.Version(version.Print("node_exporter"))
 	kingpin.Parse()
-	fmt.Println("promlogConfig:", *promlogConfig.Level, *promlogConfig.Format)
 	logger := promlog.New(promlogConfig)
 
 	level.Info(logger).Log("msg", "Starting node_exporter", "version", version.Info())

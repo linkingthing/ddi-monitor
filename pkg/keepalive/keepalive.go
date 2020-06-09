@@ -2,6 +2,7 @@ package keepalive
 
 import (
 	"context"
+	"strings"
 	"time"
 
 	"github.com/zdnscloud/cement/log"
@@ -12,11 +13,9 @@ import (
 	pb "github.com/linkingthing/ddi-monitor/pkg/proto"
 )
 
-var GIsRunning = true
-
 func New(conn *grpc.ClientConn, conf *config.MonitorConfig) error {
 	cli := pb.NewMonitorManagerClient(conn)
-	for GIsRunning {
+	for {
 		var req pb.KeepAliveReq
 		cpuUsage, memUsage, err := importer.GetMetric(conf)
 		if err != nil {
@@ -31,9 +30,9 @@ func New(conn *grpc.ClientConn, conf *config.MonitorConfig) error {
 		req.Roles = conf.Server.Roles
 		req.DnsAlive = true
 		req.DhcpAlive = true
-		if Resp, err := cli.KeepAlive(context.Background(), &req); err != nil {
-			log.Errorf("grpc client exec KeepAliveReq failed: %s,%s", Resp.Msg, err.Error())
-			continue
+		req.ControllerIP = strings.Split(conf.ControllerAddr, ":")[0]
+		if _, err := cli.KeepAlive(context.Background(), &req); err != nil {
+			log.Warnf("grpc client exec KeepAliveReq failed: %s", err.Error())
 		}
 		time.Sleep(time.Second * time.Duration(conf.Server.ProbeInterval))
 	}

@@ -28,11 +28,12 @@ func main() {
 
 	conn, err := grpc.Dial(conf.ControllerAddr, grpc.WithInsecure())
 	if err != nil {
-		log.Fatalf("dial grpc server failed: %s", err.Error())
+		log.Warnf("dial grpc server failed: %s", err.Error())
 	}
 	defer conn.Close()
 
 	register.Register(conn, conf)
+
 	go exporter.NodeExporter(conf)
 	keepalive.New(conn, conf)
 }
