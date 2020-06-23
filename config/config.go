@@ -7,8 +7,9 @@ import (
 type ServiceRole string
 
 const (
-	ServiceRoleDHCP = "dhcp"
-	ServiceRoleDNS  = "dns"
+	ServiceRoleDHCP       = "dhcp"
+	ServiceRoleDNS        = "dns"
+	ServiceRoleController = "controller"
 )
 
 type MonitorConfig struct {
