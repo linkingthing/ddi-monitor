@@ -4,6 +4,13 @@ import (
 	"github.com/zdnscloud/cement/configure"
 )
 
+type ServiceRole string
+
+const (
+	ServiceRoleDHCP = "dhcp"
+	ServiceRoleDNS  = "dns"
+)
+
 type MonitorConfig struct {
 	Path           string         `yaml:"-"`
 	Server         ServerConf     `yaml:"server"`
