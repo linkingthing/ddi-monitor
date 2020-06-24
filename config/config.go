@@ -7,9 +7,9 @@ import (
 type ServiceRole string
 
 const (
-	ServiceRoleDHCP       = "dhcp"
-	ServiceRoleDNS        = "dns"
-	ServiceRoleController = "controller"
+	ServiceRoleDHCP       ServiceRole = "dhcp"
+	ServiceRoleDNS        ServiceRole = "dns"
+	ServiceRoleController ServiceRole = "controller"
 )
 
 type MonitorConfig struct {
@@ -20,11 +20,11 @@ type MonitorConfig struct {
 }
 
 type ServerConf struct {
-	IP            string   `yaml:"ip"`
-	HostName      string   `yaml:"hostname"`
-	Roles         []string `yaml:"roles"`
-	ProbeInterval uint     `yaml:"probe_interval"`
-	ExporterPort  string   `yaml:"exporter_port"`
+	IP            string        `yaml:"ip"`
+	HostName      string        `yaml:"hostname"`
+	Roles         []ServiceRole `yaml:"roles"`
+	ProbeInterval uint          `yaml:"probe_interval"`
+	ExporterPort  string        `yaml:"exporter_port"`
 }
 
 type PrometheusConf struct {

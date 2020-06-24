@@ -13,6 +13,7 @@ import (
 	"github.com/linkingthing/ddi-monitor/config"
 	"github.com/linkingthing/ddi-monitor/pkg/metric/importer"
 	pb "github.com/linkingthing/ddi-monitor/pkg/proto"
+	"github.com/linkingthing/ddi-monitor/pkg/util"
 )
 
 func New(conn *grpc.ClientConn, conf *config.MonitorConfig) error {
@@ -29,7 +30,7 @@ func New(conn *grpc.ClientConn, conf *config.MonitorConfig) error {
 			req.MemUsage = memUsage
 		}
 		req.IP = conf.Server.IP
-		req.Roles = conf.Server.Roles
+		req.Roles = util.GetPbRoles(conf.Server.Roles)
 		if req.DnsAlive, err = checkDNSProcess(); err != nil {
 			return fmt.Errorf("execute checkDNSProcess fail:%s", err.Error())
 		}
