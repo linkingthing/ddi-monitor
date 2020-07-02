@@ -42,7 +42,7 @@ type Response struct {
 }
 
 func GetMetric(conf *config.MonitorConfig) (string, string, error) {
-	cpuPQL := "100 - (avg(irate(node_cpu_seconds_total{instance=\"" + conf.Server.IP + ":" + physicalExportPort + "\", mode=\"idle\"}[5m])) by (instance) * 100)"
+	cpuPQL := "100 - (avg(irate(node_cpu_seconds_total{instance=\"" + conf.Server.IP + ":" + physicalExportPort + "\", mode=\"idle\"}[1m])) by (instance) * 100)"
 	memPQL := "(node_memory_MemFree_bytes{instance=\"" + conf.Server.IP + ":" + physicalExportPort + "\"}+node_memory_Cached_bytes{instance=\"" +
 		conf.Server.IP + ":" + physicalExportPort + "\"}+node_memory_Buffers_bytes{instance=\"" + conf.Server.IP + ":" + physicalExportPort + "\"}) / node_memory_MemTotal_bytes * 100"
 	cpuResp, err := getCurrentMetric(conf, cpuPQL)
