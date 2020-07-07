@@ -30,6 +30,7 @@ func New(conn *grpc.ClientConn, conf *config.MonitorConfig) error {
 			req.MemUsage = memUsage
 		}
 		req.IP = conf.Server.IP
+		req.Master = conf.Master
 		req.Roles = util.GetPbRoles(conf.Server.Roles)
 		if req.DnsAlive, err = checkDNSProcess(); err != nil {
 			return fmt.Errorf("execute checkDNSProcess fail:%s", err.Error())

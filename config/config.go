@@ -17,6 +17,7 @@ type MonitorConfig struct {
 	Server         ServerConf     `yaml:"server"`
 	ControllerAddr string         `yaml:"controller_addr"`
 	Prometheus     PrometheusConf `yaml:"prometheus"`
+	Master         string         `yaml:"master"`
 }
 
 type ServerConf struct {
