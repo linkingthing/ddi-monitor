@@ -17,7 +17,7 @@ var (
 )
 
 func main() {
-	flag.StringVar(&configFile, "c", "../etc/ddi-monitor.conf", "configure file path")
+	flag.StringVar(&configFile, "c", "/usr/local/etc/ddi-monitor.conf", "configure file path")
 	flag.Parse()
 
 	log.InitLogger(log.Debug)
