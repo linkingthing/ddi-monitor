@@ -35,6 +35,7 @@ bool dnsAlive = 5;
 bool dhcpAlive = 6;
 string Master = 7;
 string controllerIP = 8;
+string vip = 9;
 }
 
 message KeepAliveResp{

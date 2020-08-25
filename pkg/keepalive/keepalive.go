@@ -3,6 +3,7 @@ package keepalive
 import (
 	"context"
 	"fmt"
+	"net"
 	"strings"
 	"time"
 
@@ -30,12 +31,19 @@ func New(conn *grpc.ClientConn, conf *config.MonitorConfig) error {
 			return fmt.Errorf("execute checkDHCPProcess fail:%s", err.Error())
 		}
 		req.ControllerIP = strings.Split(conf.ControllerAddr, ":")[0]
+		isLocalVip, err := isVIPOnLocal(conf.VIP)
+		if err != nil {
+			log.Warnf("isVIPOnLocal err:%s", err.Error())
+			req.Vip = ""
+		}
+		if isLocalVip {
+			req.Vip = conf.VIP
+		}
 		if _, err := cli.KeepAlive(context.Background(), &req); err != nil {
 			log.Warnf("grpc client exec KeepAliveReq failed: %s", err.Error())
 		}
 		time.Sleep(time.Second * time.Duration(conf.Server.ProbeInterval))
 	}
-	return nil
 }
 
 func checkDHCPProcess() (bool, error) {
@@ -57,5 +65,28 @@ func checkDNSProcess() (bool, error) {
 	if strings.Index(ret, "named -c") > 0 {
 		return true, nil
 	}
+	return false, nil
+}
+
+func isVIPOnLocal(vip string) (bool, error) {
+	addrs, err := net.InterfaceAddrs()
+	if err != nil {
+		return false, fmt.Errorf("InterfaceAddrs err:%s", err.Error())
+	}
+	for _, addr := range addrs {
+
+		ipnet, ok := addr.(*net.IPNet)
+		if ok == false {
+			continue
+		}
+		if ipnet.IP.To4() != nil && ipnet.IP.To4().String() == vip {
+			return true, nil
+		} else if ipnet.IP.To4() == nil && ipnet.IP.To16() != nil && ipnet.IP.To16().String() == vip {
+			return true, nil
+		} else {
+			continue
+		}
+	}
+
 	return false, nil
 }
