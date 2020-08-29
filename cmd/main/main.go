@@ -7,6 +7,7 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/linkingthing/ddi-monitor/config"
+	"github.com/linkingthing/ddi-monitor/pkg/grpcserver"
 	"github.com/linkingthing/ddi-monitor/pkg/keepalive"
 	"github.com/linkingthing/ddi-monitor/pkg/metric/exporter"
 	"github.com/linkingthing/ddi-monitor/pkg/register"
@@ -28,12 +29,17 @@ func main() {
 
 	conn, err := grpc.Dial(conf.ControllerAddr, grpc.WithInsecure())
 	if err != nil {
-		log.Warnf("dial grpc server failed: %s", err.Error())
+		log.Fatalf("dial controller grpc server failed: %s", err.Error())
 	}
 	defer conn.Close()
 
 	register.Register(conn, conf)
+	grcpServer, err := grpcserver.New(conf)
+	if err != nil {
+		log.Fatalf("new grpc server failed: %s", err.Error())
+	}
 
 	go exporter.NodeExporter(conf)
-	keepalive.New(conn, conf)
+	go keepalive.Run(conn, conf)
+	grcpServer.Run()
 }

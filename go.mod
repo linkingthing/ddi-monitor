@@ -9,6 +9,7 @@ require (
 	github.com/prometheus/common v0.10.0
 	github.com/prometheus/node_exporter v1.0.0-rc.0.0.20200302152451-0107bc794204
 	github.com/zdnscloud/cement v0.0.0-20200503120134-aa381f4206fe
+	golang.org/x/net v0.0.0-20200202094626-16171245cfb2
 	google.golang.org/grpc v1.29.1
 	google.golang.org/protobuf v1.24.0 // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6

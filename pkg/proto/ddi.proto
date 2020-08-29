@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package proto;
+
+service DDIMonitor{
+    rpc StartDNS(StartDNSRequest) returns (DDIMonitorResponse) {}
+    rpc StartDHCP(StartDHCPRequest) returns (DDIMonitorResponse) {}
+    rpc StopDNS(StopDNSRequest) returns (DDIMonitorResponse) {}
+    rpc StopDHCP(StopDHCPRequest) returns (DDIMonitorResponse) {}
+    rpc GetDNSState(GetDNSStateRequest) returns (DDIStateResponse) {}
+    rpc GetDHCPState(GetDHCPStateRequest) returns (DDIStateResponse) {}
+}
+
+message StartDNSRequest {
+    string config_path = 1;
+    string config_name = 2;
+}
+
+message StartDHCPRequest{}
+
+message StopDNSRequest {
+    string config_path = 1;
+}
+
+message StopDHCPRequest{}
+
+message DDIMonitorResponse {
+    bool succeed = 1;
+}
+
+message GetDNSStateRequest {}
+
+message GetDHCPStateRequest {}
+
+message DDIStateResponse {
+    bool is_running = 1;
+}
