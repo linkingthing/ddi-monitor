@@ -2,7 +2,6 @@ package keepalive
 
 import (
 	"context"
-	"fmt"
 	"net"
 	"path/filepath"
 
@@ -32,15 +31,12 @@ func (s *DDIService) StartDNS(ctx context.Context, req *pb.StartDNSRequest) (*pb
 
 func (s *DDIService) startDNS(req *pb.StartDNSRequest) error {
 	if isRunning, err := checkDNSIsRunning(); err != nil {
-		fmt.Printf("check dns running failed: %s\n", err.Error())
 		return err
 	} else if isRunning {
 		return nil
 	}
 
-	fmt.Printf("cmd: %s and conf: %s\n", filepath.Join(s.dnsConfDir, "named"), filepath.Join(s.dnsConfDir, DNSConfName))
 	if _, err := shell.Shell(filepath.Join(s.dnsConfDir, "named"), "-c", filepath.Join(s.dnsConfDir, DNSConfName)); err != nil {
-		fmt.Printf("dns run failed: %s\n", err.Error())
 		return err
 	}
 
@@ -56,6 +52,11 @@ func (s *DDIService) StartDHCP(ctx context.Context, req *pb.StartDHCPRequest) (*
 }
 
 func (s *DDIService) startDHCP(req *pb.StartDHCPRequest) error {
+	if isRunning, err := checkDHCPIsRunning(); err != nil {
+		return err
+	} else if isRunning {
+		return nil
+	}
 	_, err := shell.Shell("keactrl", "start")
 	return err
 }
