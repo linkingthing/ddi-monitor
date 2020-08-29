@@ -2,6 +2,8 @@ package keepalive
 
 import (
 	"context"
+	"fmt"
+	"net"
 	"path/filepath"
 
 	"github.com/zdnscloud/cement/shell"
@@ -30,12 +32,15 @@ func (s *DDIService) StartDNS(ctx context.Context, req *pb.StartDNSRequest) (*pb
 
 func (s *DDIService) startDNS(req *pb.StartDNSRequest) error {
 	if isRunning, err := checkDNSIsRunning(); err != nil {
+		fmt.Printf("check dns running failed: %s\n", err.Error())
 		return err
 	} else if isRunning {
 		return nil
 	}
 
+	fmt.Printf("cmd: %s and conf: %s\n", filepath.Join(s.dnsConfDir, "named"), filepath.Join(s.dnsConfDir, DNSConfName))
 	if _, err := shell.Shell(filepath.Join(s.dnsConfDir, "named"), "-c", filepath.Join(s.dnsConfDir, DNSConfName)); err != nil {
+		fmt.Printf("dns run failed: %s\n", err.Error())
 		return err
 	}
 
@@ -101,4 +106,48 @@ func (s *DDIService) GetDHCPState(context.Context, *pb.GetDHCPStateRequest) (*pb
 	} else {
 		return &pb.DDIStateResponse{IsRunning: isRunning}, nil
 	}
+}
+
+func (s *DDIService) GetInterfaces(ctx context.Context, req *pb.GetInterfacesRequest) (*pb.GetInterfacesResponse, error) {
+	if interfaces4, interfaces6, err := getInterfaces(); err != nil {
+		return &pb.GetInterfacesResponse{}, err
+	} else {
+		return &pb.GetInterfacesResponse{Interfaces4: interfaces4, Interfaces6: interfaces6}, nil
+	}
+}
+
+func getInterfaces() ([]string, []string, error) {
+	interfaces4 := []string{"*"}
+	interfaces6 := []string{"*"}
+	its, err := net.Interfaces()
+	if err != nil {
+		return interfaces4, interfaces6, nil
+	}
+
+	for _, it := range its {
+		addrs, err := it.Addrs()
+		if err != nil {
+			continue
+		}
+
+		for _, addr := range addrs {
+			ipnet, ok := addr.(*net.IPNet)
+			if ok == false {
+				continue
+			}
+
+			ip := ipnet.IP
+			if ip.To4() != nil {
+				if ip.IsGlobalUnicast() {
+					interfaces4 = append(interfaces4, it.Name+"/"+ip.String())
+				}
+			} else {
+				if ip.IsGlobalUnicast() {
+					interfaces6 = append(interfaces6, it.Name+"/"+ip.String())
+				}
+			}
+		}
+	}
+
+	return interfaces4, interfaces6, nil
 }
