@@ -19,6 +19,7 @@ type MonitorConfig struct {
 	Prometheus     PrometheusConf `yaml:"prometheus"`
 	Master         string         `yaml:"master"`
 	VIP            string         `yaml:"vip"`
+	DNS            DNSConf        `yaml:"dns"`
 }
 
 type ServerConf struct {
@@ -32,6 +33,10 @@ type ServerConf struct {
 
 type PrometheusConf struct {
 	Addr string `yaml:"addr"`
+}
+
+type DNSConf struct {
+	ConfigDir string `yaml:"config_dir"`
 }
 
 func LoadConfig(path string) (*MonitorConfig, error) {

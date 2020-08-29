@@ -6,14 +6,18 @@ import (
 
 	"github.com/zdnscloud/cement/shell"
 
+	"github.com/linkingthing/ddi-monitor/config"
 	pb "github.com/linkingthing/ddi-monitor/pkg/proto"
 )
 
+const DNSConfName = "named.conf"
+
 type DDIService struct {
+	dnsConfDir string
 }
 
-func NewDDIService() *DDIService {
-	return &DDIService{}
+func NewDDIService(conf *config.MonitorConfig) *DDIService {
+	return &DDIService{dnsConfDir: conf.DNS.ConfigDir}
 }
 
 func (s *DDIService) StartDNS(ctx context.Context, req *pb.StartDNSRequest) (*pb.DDIMonitorResponse, error) {
@@ -31,7 +35,7 @@ func (s *DDIService) startDNS(req *pb.StartDNSRequest) error {
 		return nil
 	}
 
-	if _, err := shell.Shell(filepath.Join(req.GetConfigPath(), "named"), "-c", filepath.Join(req.GetConfigPath(), req.GetConfigName())); err != nil {
+	if _, err := shell.Shell(filepath.Join(s.dnsConfDir, "named"), "-c", filepath.Join(s.dnsConfDir, DNSConfName)); err != nil {
 		return err
 	}
 
@@ -60,7 +64,7 @@ func (s *DDIService) StopDNS(ctx context.Context, req *pb.StopDNSRequest) (*pb.D
 }
 
 func (s *DDIService) stopDNS(req *pb.StopDNSRequest) error {
-	if _, err := shell.Shell(filepath.Join(req.GetConfigPath(), "rndc"), "stop"); err != nil {
+	if _, err := shell.Shell(filepath.Join(s.dnsConfDir, "rndc"), "stop"); err != nil {
 		return err
 	}
 

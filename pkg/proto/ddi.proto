@@ -11,16 +11,11 @@ service DDIMonitor{
     rpc GetDHCPState(GetDHCPStateRequest) returns (DDIStateResponse) {}
 }
 
-message StartDNSRequest {
-    string config_path = 1;
-    string config_name = 2;
-}
+message StartDNSRequest {}
 
 message StartDHCPRequest{}
 
-message StopDNSRequest {
-    string config_path = 1;
-}
+message StopDNSRequest {}
 
 message StopDHCPRequest{}
 

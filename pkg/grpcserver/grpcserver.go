@@ -27,7 +27,7 @@ func New(conf *config.MonitorConfig) (*GRPCServer, error) {
 		listener: listener,
 	}
 
-	pb.RegisterDDIMonitorServer(grpcServer.server, keepalive.NewDDIService())
+	pb.RegisterDDIMonitorServer(grpcServer.server, keepalive.NewDDIService(conf))
 	return grpcServer, nil
 }
 
