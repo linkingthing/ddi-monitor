@@ -3,9 +3,8 @@ package keepalive
 import (
 	"context"
 	"net"
+	"os/exec"
 	"path/filepath"
-
-	"github.com/zdnscloud/cement/shell"
 
 	"github.com/linkingthing/ddi-monitor/config"
 	pb "github.com/linkingthing/ddi-monitor/pkg/proto"
@@ -36,11 +35,7 @@ func (s *DDIService) startDNS(req *pb.StartDNSRequest) error {
 		return nil
 	}
 
-	if _, err := shell.Shell(filepath.Join(s.dnsConfDir, "named"), "-c", filepath.Join(s.dnsConfDir, DNSConfName)); err != nil {
-		return err
-	}
-
-	return nil
+	return runCommand(filepath.Join(s.dnsConfDir, "named") + " -c " + filepath.Join(s.dnsConfDir, DNSConfName))
 }
 
 func (s *DDIService) StartDHCP(ctx context.Context, req *pb.StartDHCPRequest) (*pb.DDIMonitorResponse, error) {
@@ -57,8 +52,13 @@ func (s *DDIService) startDHCP(req *pb.StartDHCPRequest) error {
 	} else if isRunning {
 		return nil
 	}
-	_, err := shell.Shell("keactrl", "start")
-	return err
+
+	return runCommand("keactrl start")
+}
+
+func runCommand(cmdline string) error {
+	cmd := exec.Command("bash", "-c", cmdline)
+	return cmd.Run()
 }
 
 func (s *DDIService) StopDNS(ctx context.Context, req *pb.StopDNSRequest) (*pb.DDIMonitorResponse, error) {
@@ -70,11 +70,7 @@ func (s *DDIService) StopDNS(ctx context.Context, req *pb.StopDNSRequest) (*pb.D
 }
 
 func (s *DDIService) stopDNS(req *pb.StopDNSRequest) error {
-	if _, err := shell.Shell(filepath.Join(s.dnsConfDir, "rndc"), "stop"); err != nil {
-		return err
-	}
-
-	return nil
+	return runCommand(filepath.Join(s.dnsConfDir, "rndc") + " stop")
 }
 
 func (s *DDIService) StopDHCP(ctx context.Context, req *pb.StopDHCPRequest) (*pb.DDIMonitorResponse, error) {
@@ -86,11 +82,7 @@ func (s *DDIService) StopDHCP(ctx context.Context, req *pb.StopDHCPRequest) (*pb
 }
 
 func (s *DDIService) stopDHCP(req *pb.StopDHCPRequest) error {
-	if _, err := shell.Shell("keactrl", "stop"); err != nil {
-		return err
-	}
-
-	return nil
+	return runCommand("keactrl stop")
 }
 
 func (s *DDIService) GetDNSState(context.Context, *pb.GetDNSStateRequest) (*pb.DDIStateResponse, error) {
