@@ -3,86 +3,49 @@ package keepalive
 import (
 	"context"
 	"net"
-	"os/exec"
-	"path/filepath"
 
 	"github.com/linkingthing/ddi-monitor/config"
 	pb "github.com/linkingthing/ddi-monitor/pkg/proto"
 )
 
-const DNSConfName = "named.conf"
-
 type DDIService struct {
-	dnsConfDir string
+	handler *DDIHandler
 }
 
 func NewDDIService(conf *config.MonitorConfig) *DDIService {
-	return &DDIService{dnsConfDir: conf.DNS.ConfigDir}
+	return &DDIService{handler: newDDIHandler(conf.DNS.Addr, conf.DNS.ConfigDir, conf.DNS.ProxyPort)}
 }
 
 func (s *DDIService) StartDNS(ctx context.Context, req *pb.StartDNSRequest) (*pb.DDIMonitorResponse, error) {
-	if err := s.startDNS(req); err != nil {
+	if err := s.handler.startDNS(req); err != nil {
 		return &pb.DDIMonitorResponse{Succeed: false}, err
 	} else {
 		return &pb.DDIMonitorResponse{Succeed: true}, nil
 	}
-}
-
-func (s *DDIService) startDNS(req *pb.StartDNSRequest) error {
-	if isRunning, err := checkDNSIsRunning(); err != nil {
-		return err
-	} else if isRunning {
-		return nil
-	}
-
-	return runCommand(filepath.Join(s.dnsConfDir, "named") + " -c " + filepath.Join(s.dnsConfDir, DNSConfName))
 }
 
 func (s *DDIService) StartDHCP(ctx context.Context, req *pb.StartDHCPRequest) (*pb.DDIMonitorResponse, error) {
-	if err := s.startDHCP(req); err != nil {
+	if err := s.handler.startDHCP(req); err != nil {
 		return &pb.DDIMonitorResponse{Succeed: false}, err
 	} else {
 		return &pb.DDIMonitorResponse{Succeed: true}, nil
 	}
-}
-
-func (s *DDIService) startDHCP(req *pb.StartDHCPRequest) error {
-	if isRunning, err := checkDHCPIsRunning(); err != nil {
-		return err
-	} else if isRunning {
-		return nil
-	}
-
-	return runCommand("keactrl start")
-}
-
-func runCommand(cmdline string) error {
-	cmd := exec.Command("bash", "-c", cmdline)
-	return cmd.Run()
 }
 
 func (s *DDIService) StopDNS(ctx context.Context, req *pb.StopDNSRequest) (*pb.DDIMonitorResponse, error) {
-	if err := s.stopDNS(req); err != nil {
+	if err := s.handler.stopDNS(req); err != nil {
 		return &pb.DDIMonitorResponse{Succeed: false}, err
 	} else {
 		return &pb.DDIMonitorResponse{Succeed: true}, nil
 	}
-}
-
-func (s *DDIService) stopDNS(req *pb.StopDNSRequest) error {
-	return runCommand(filepath.Join(s.dnsConfDir, "rndc") + " stop")
 }
 
 func (s *DDIService) StopDHCP(ctx context.Context, req *pb.StopDHCPRequest) (*pb.DDIMonitorResponse, error) {
-	if err := s.stopDHCP(req); err != nil {
+	if err := s.handler.stopDHCP(req); err != nil {
 		return &pb.DDIMonitorResponse{Succeed: false}, err
 	} else {
 		return &pb.DDIMonitorResponse{Succeed: true}, nil
 	}
-}
-
-func (s *DDIService) stopDHCP(req *pb.StopDHCPRequest) error {
-	return runCommand("keactrl stop")
 }
 
 func (s *DDIService) GetDNSState(context.Context, *pb.GetDNSStateRequest) (*pb.DDIStateResponse, error) {
@@ -143,4 +106,68 @@ func getInterfaces() ([]string, []string, error) {
 	}
 
 	return interfaces4, interfaces6, nil
+}
+
+func (s *DDIService) ReconfigDNS(ctx context.Context, req *pb.ReconfigDNSRequest) (*pb.DDIMonitorResponse, error) {
+	if err := s.handler.reconfigDNS(); err != nil {
+		return &pb.DDIMonitorResponse{Succeed: false}, err
+	} else {
+		return &pb.DDIMonitorResponse{Succeed: true}, nil
+	}
+}
+
+func (s *DDIService) ReloadDNSConfig(ctx context.Context, req *pb.ReloadDNSConfigRequest) (*pb.DDIMonitorResponse, error) {
+	if err := s.handler.reloadDNS(); err != nil {
+		return &pb.DDIMonitorResponse{Succeed: false}, err
+	} else {
+		return &pb.DDIMonitorResponse{Succeed: true}, nil
+	}
+}
+
+func (s *DDIService) AddDNSZone(ctx context.Context, req *pb.AddDNSZoneRequest) (*pb.DDIMonitorResponse, error) {
+	if err := s.handler.addDNSZone(req); err != nil {
+		return &pb.DDIMonitorResponse{Succeed: false}, err
+	} else {
+		return &pb.DDIMonitorResponse{Succeed: true}, nil
+	}
+}
+
+func (s *DDIService) UpdateDNSZone(ctx context.Context, req *pb.UpdateDNSZoneRequest) (*pb.DDIMonitorResponse, error) {
+	if err := s.handler.updateDNSZone(req); err != nil {
+		return &pb.DDIMonitorResponse{Succeed: false}, err
+	} else {
+		return &pb.DDIMonitorResponse{Succeed: true}, nil
+	}
+}
+
+func (s *DDIService) DeleteDNSZone(ctx context.Context, req *pb.DeleteDNSZoneRequest) (*pb.DDIMonitorResponse, error) {
+	if err := s.handler.deleteDNSZone(req); err != nil {
+		return &pb.DDIMonitorResponse{Succeed: false}, err
+	} else {
+		return &pb.DDIMonitorResponse{Succeed: true}, nil
+	}
+}
+
+func (s *DDIService) DumpDNSAllZonesConfig(ctx context.Context, req *pb.DumpDNSAllZonesConfigRequest) (*pb.DDIMonitorResponse, error) {
+	if err := s.handler.dumpDNSAllZonesConfig(); err != nil {
+		return &pb.DDIMonitorResponse{Succeed: false}, err
+	} else {
+		return &pb.DDIMonitorResponse{Succeed: true}, nil
+	}
+}
+
+func (s *DDIService) DumpDNSZoneConfig(ctx context.Context, req *pb.DumpDNSZoneConfigRequest) (*pb.DDIMonitorResponse, error) {
+	if err := s.handler.dumpDNSZoneConfig(req); err != nil {
+		return &pb.DDIMonitorResponse{Succeed: false}, err
+	} else {
+		return &pb.DDIMonitorResponse{Succeed: true}, nil
+	}
+}
+
+func (s *DDIService) ReloadNginxConfig(ctx context.Context, req *pb.ReloadNginxConfigRequest) (*pb.DDIMonitorResponse, error) {
+	if err := s.handler.reloadNginxConfig(); err != nil {
+		return &pb.DDIMonitorResponse{Succeed: false}, err
+	} else {
+		return &pb.DDIMonitorResponse{Succeed: true}, nil
+	}
 }

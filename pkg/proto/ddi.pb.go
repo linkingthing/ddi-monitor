@@ -33,7 +33,7 @@ func (m *StartDNSRequest) Reset()         { *m = StartDNSRequest{} }
 func (m *StartDNSRequest) String() string { return proto.CompactTextString(m) }
 func (*StartDNSRequest) ProtoMessage()    {}
 func (*StartDNSRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ddi_3631ff8d3b74ddf5, []int{0}
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{0}
 }
 func (m *StartDNSRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StartDNSRequest.Unmarshal(m, b)
@@ -63,7 +63,7 @@ func (m *StartDHCPRequest) Reset()         { *m = StartDHCPRequest{} }
 func (m *StartDHCPRequest) String() string { return proto.CompactTextString(m) }
 func (*StartDHCPRequest) ProtoMessage()    {}
 func (*StartDHCPRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ddi_3631ff8d3b74ddf5, []int{1}
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{1}
 }
 func (m *StartDHCPRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StartDHCPRequest.Unmarshal(m, b)
@@ -93,7 +93,7 @@ func (m *StopDNSRequest) Reset()         { *m = StopDNSRequest{} }
 func (m *StopDNSRequest) String() string { return proto.CompactTextString(m) }
 func (*StopDNSRequest) ProtoMessage()    {}
 func (*StopDNSRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ddi_3631ff8d3b74ddf5, []int{2}
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{2}
 }
 func (m *StopDNSRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StopDNSRequest.Unmarshal(m, b)
@@ -123,7 +123,7 @@ func (m *StopDHCPRequest) Reset()         { *m = StopDHCPRequest{} }
 func (m *StopDHCPRequest) String() string { return proto.CompactTextString(m) }
 func (*StopDHCPRequest) ProtoMessage()    {}
 func (*StopDHCPRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ddi_3631ff8d3b74ddf5, []int{3}
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{3}
 }
 func (m *StopDHCPRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StopDHCPRequest.Unmarshal(m, b)
@@ -154,7 +154,7 @@ func (m *DDIMonitorResponse) Reset()         { *m = DDIMonitorResponse{} }
 func (m *DDIMonitorResponse) String() string { return proto.CompactTextString(m) }
 func (*DDIMonitorResponse) ProtoMessage()    {}
 func (*DDIMonitorResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ddi_3631ff8d3b74ddf5, []int{4}
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{4}
 }
 func (m *DDIMonitorResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DDIMonitorResponse.Unmarshal(m, b)
@@ -191,7 +191,7 @@ func (m *GetDNSStateRequest) Reset()         { *m = GetDNSStateRequest{} }
 func (m *GetDNSStateRequest) String() string { return proto.CompactTextString(m) }
 func (*GetDNSStateRequest) ProtoMessage()    {}
 func (*GetDNSStateRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ddi_3631ff8d3b74ddf5, []int{5}
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{5}
 }
 func (m *GetDNSStateRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetDNSStateRequest.Unmarshal(m, b)
@@ -221,7 +221,7 @@ func (m *GetDHCPStateRequest) Reset()         { *m = GetDHCPStateRequest{} }
 func (m *GetDHCPStateRequest) String() string { return proto.CompactTextString(m) }
 func (*GetDHCPStateRequest) ProtoMessage()    {}
 func (*GetDHCPStateRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ddi_3631ff8d3b74ddf5, []int{6}
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{6}
 }
 func (m *GetDHCPStateRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetDHCPStateRequest.Unmarshal(m, b)
@@ -252,7 +252,7 @@ func (m *DDIStateResponse) Reset()         { *m = DDIStateResponse{} }
 func (m *DDIStateResponse) String() string { return proto.CompactTextString(m) }
 func (*DDIStateResponse) ProtoMessage()    {}
 func (*DDIStateResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ddi_3631ff8d3b74ddf5, []int{7}
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{7}
 }
 func (m *DDIStateResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DDIStateResponse.Unmarshal(m, b)
@@ -289,7 +289,7 @@ func (m *GetInterfacesRequest) Reset()         { *m = GetInterfacesRequest{} }
 func (m *GetInterfacesRequest) String() string { return proto.CompactTextString(m) }
 func (*GetInterfacesRequest) ProtoMessage()    {}
 func (*GetInterfacesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ddi_3631ff8d3b74ddf5, []int{8}
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{8}
 }
 func (m *GetInterfacesRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetInterfacesRequest.Unmarshal(m, b)
@@ -321,7 +321,7 @@ func (m *GetInterfacesResponse) Reset()         { *m = GetInterfacesResponse{} }
 func (m *GetInterfacesResponse) String() string { return proto.CompactTextString(m) }
 func (*GetInterfacesResponse) ProtoMessage()    {}
 func (*GetInterfacesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ddi_3631ff8d3b74ddf5, []int{9}
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{9}
 }
 func (m *GetInterfacesResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetInterfacesResponse.Unmarshal(m, b)
@@ -355,6 +355,326 @@ func (m *GetInterfacesResponse) GetInterfaces6() []string {
 	return nil
 }
 
+type ReconfigDNSRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ReconfigDNSRequest) Reset()         { *m = ReconfigDNSRequest{} }
+func (m *ReconfigDNSRequest) String() string { return proto.CompactTextString(m) }
+func (*ReconfigDNSRequest) ProtoMessage()    {}
+func (*ReconfigDNSRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{10}
+}
+func (m *ReconfigDNSRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ReconfigDNSRequest.Unmarshal(m, b)
+}
+func (m *ReconfigDNSRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ReconfigDNSRequest.Marshal(b, m, deterministic)
+}
+func (dst *ReconfigDNSRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ReconfigDNSRequest.Merge(dst, src)
+}
+func (m *ReconfigDNSRequest) XXX_Size() int {
+	return xxx_messageInfo_ReconfigDNSRequest.Size(m)
+}
+func (m *ReconfigDNSRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ReconfigDNSRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ReconfigDNSRequest proto.InternalMessageInfo
+
+type ReloadDNSConfigRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ReloadDNSConfigRequest) Reset()         { *m = ReloadDNSConfigRequest{} }
+func (m *ReloadDNSConfigRequest) String() string { return proto.CompactTextString(m) }
+func (*ReloadDNSConfigRequest) ProtoMessage()    {}
+func (*ReloadDNSConfigRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{11}
+}
+func (m *ReloadDNSConfigRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ReloadDNSConfigRequest.Unmarshal(m, b)
+}
+func (m *ReloadDNSConfigRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ReloadDNSConfigRequest.Marshal(b, m, deterministic)
+}
+func (dst *ReloadDNSConfigRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ReloadDNSConfigRequest.Merge(dst, src)
+}
+func (m *ReloadDNSConfigRequest) XXX_Size() int {
+	return xxx_messageInfo_ReloadDNSConfigRequest.Size(m)
+}
+func (m *ReloadDNSConfigRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ReloadDNSConfigRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ReloadDNSConfigRequest proto.InternalMessageInfo
+
+type AddDNSZoneRequest struct {
+	ZoneName             string   `protobuf:"bytes,1,opt,name=zone_name,json=zoneName,proto3" json:"zone_name,omitempty"`
+	ViewName             string   `protobuf:"bytes,2,opt,name=view_name,json=viewName,proto3" json:"view_name,omitempty"`
+	ZoneFile             string   `protobuf:"bytes,3,opt,name=zone_file,json=zoneFile,proto3" json:"zone_file,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *AddDNSZoneRequest) Reset()         { *m = AddDNSZoneRequest{} }
+func (m *AddDNSZoneRequest) String() string { return proto.CompactTextString(m) }
+func (*AddDNSZoneRequest) ProtoMessage()    {}
+func (*AddDNSZoneRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{12}
+}
+func (m *AddDNSZoneRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AddDNSZoneRequest.Unmarshal(m, b)
+}
+func (m *AddDNSZoneRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AddDNSZoneRequest.Marshal(b, m, deterministic)
+}
+func (dst *AddDNSZoneRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddDNSZoneRequest.Merge(dst, src)
+}
+func (m *AddDNSZoneRequest) XXX_Size() int {
+	return xxx_messageInfo_AddDNSZoneRequest.Size(m)
+}
+func (m *AddDNSZoneRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddDNSZoneRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddDNSZoneRequest proto.InternalMessageInfo
+
+func (m *AddDNSZoneRequest) GetZoneName() string {
+	if m != nil {
+		return m.ZoneName
+	}
+	return ""
+}
+
+func (m *AddDNSZoneRequest) GetViewName() string {
+	if m != nil {
+		return m.ViewName
+	}
+	return ""
+}
+
+func (m *AddDNSZoneRequest) GetZoneFile() string {
+	if m != nil {
+		return m.ZoneFile
+	}
+	return ""
+}
+
+type UpdateDNSZoneRequest struct {
+	ZoneName             string   `protobuf:"bytes,1,opt,name=zone_name,json=zoneName,proto3" json:"zone_name,omitempty"`
+	ViewName             string   `protobuf:"bytes,2,opt,name=view_name,json=viewName,proto3" json:"view_name,omitempty"`
+	ZoneFile             string   `protobuf:"bytes,3,opt,name=zone_file,json=zoneFile,proto3" json:"zone_file,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *UpdateDNSZoneRequest) Reset()         { *m = UpdateDNSZoneRequest{} }
+func (m *UpdateDNSZoneRequest) String() string { return proto.CompactTextString(m) }
+func (*UpdateDNSZoneRequest) ProtoMessage()    {}
+func (*UpdateDNSZoneRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{13}
+}
+func (m *UpdateDNSZoneRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateDNSZoneRequest.Unmarshal(m, b)
+}
+func (m *UpdateDNSZoneRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateDNSZoneRequest.Marshal(b, m, deterministic)
+}
+func (dst *UpdateDNSZoneRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateDNSZoneRequest.Merge(dst, src)
+}
+func (m *UpdateDNSZoneRequest) XXX_Size() int {
+	return xxx_messageInfo_UpdateDNSZoneRequest.Size(m)
+}
+func (m *UpdateDNSZoneRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateDNSZoneRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateDNSZoneRequest proto.InternalMessageInfo
+
+func (m *UpdateDNSZoneRequest) GetZoneName() string {
+	if m != nil {
+		return m.ZoneName
+	}
+	return ""
+}
+
+func (m *UpdateDNSZoneRequest) GetViewName() string {
+	if m != nil {
+		return m.ViewName
+	}
+	return ""
+}
+
+func (m *UpdateDNSZoneRequest) GetZoneFile() string {
+	if m != nil {
+		return m.ZoneFile
+	}
+	return ""
+}
+
+type DeleteDNSZoneRequest struct {
+	ZoneName             string   `protobuf:"bytes,1,opt,name=zone_name,json=zoneName,proto3" json:"zone_name,omitempty"`
+	ViewName             string   `protobuf:"bytes,2,opt,name=view_name,json=viewName,proto3" json:"view_name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DeleteDNSZoneRequest) Reset()         { *m = DeleteDNSZoneRequest{} }
+func (m *DeleteDNSZoneRequest) String() string { return proto.CompactTextString(m) }
+func (*DeleteDNSZoneRequest) ProtoMessage()    {}
+func (*DeleteDNSZoneRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{14}
+}
+func (m *DeleteDNSZoneRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeleteDNSZoneRequest.Unmarshal(m, b)
+}
+func (m *DeleteDNSZoneRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DeleteDNSZoneRequest.Marshal(b, m, deterministic)
+}
+func (dst *DeleteDNSZoneRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteDNSZoneRequest.Merge(dst, src)
+}
+func (m *DeleteDNSZoneRequest) XXX_Size() int {
+	return xxx_messageInfo_DeleteDNSZoneRequest.Size(m)
+}
+func (m *DeleteDNSZoneRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteDNSZoneRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteDNSZoneRequest proto.InternalMessageInfo
+
+func (m *DeleteDNSZoneRequest) GetZoneName() string {
+	if m != nil {
+		return m.ZoneName
+	}
+	return ""
+}
+
+func (m *DeleteDNSZoneRequest) GetViewName() string {
+	if m != nil {
+		return m.ViewName
+	}
+	return ""
+}
+
+type DumpDNSAllZonesConfigRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DumpDNSAllZonesConfigRequest) Reset()         { *m = DumpDNSAllZonesConfigRequest{} }
+func (m *DumpDNSAllZonesConfigRequest) String() string { return proto.CompactTextString(m) }
+func (*DumpDNSAllZonesConfigRequest) ProtoMessage()    {}
+func (*DumpDNSAllZonesConfigRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{15}
+}
+func (m *DumpDNSAllZonesConfigRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DumpDNSAllZonesConfigRequest.Unmarshal(m, b)
+}
+func (m *DumpDNSAllZonesConfigRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DumpDNSAllZonesConfigRequest.Marshal(b, m, deterministic)
+}
+func (dst *DumpDNSAllZonesConfigRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DumpDNSAllZonesConfigRequest.Merge(dst, src)
+}
+func (m *DumpDNSAllZonesConfigRequest) XXX_Size() int {
+	return xxx_messageInfo_DumpDNSAllZonesConfigRequest.Size(m)
+}
+func (m *DumpDNSAllZonesConfigRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DumpDNSAllZonesConfigRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DumpDNSAllZonesConfigRequest proto.InternalMessageInfo
+
+type DumpDNSZoneConfigRequest struct {
+	ZoneName             string   `protobuf:"bytes,1,opt,name=zone_name,json=zoneName,proto3" json:"zone_name,omitempty"`
+	ViewName             string   `protobuf:"bytes,2,opt,name=view_name,json=viewName,proto3" json:"view_name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DumpDNSZoneConfigRequest) Reset()         { *m = DumpDNSZoneConfigRequest{} }
+func (m *DumpDNSZoneConfigRequest) String() string { return proto.CompactTextString(m) }
+func (*DumpDNSZoneConfigRequest) ProtoMessage()    {}
+func (*DumpDNSZoneConfigRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{16}
+}
+func (m *DumpDNSZoneConfigRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DumpDNSZoneConfigRequest.Unmarshal(m, b)
+}
+func (m *DumpDNSZoneConfigRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DumpDNSZoneConfigRequest.Marshal(b, m, deterministic)
+}
+func (dst *DumpDNSZoneConfigRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DumpDNSZoneConfigRequest.Merge(dst, src)
+}
+func (m *DumpDNSZoneConfigRequest) XXX_Size() int {
+	return xxx_messageInfo_DumpDNSZoneConfigRequest.Size(m)
+}
+func (m *DumpDNSZoneConfigRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DumpDNSZoneConfigRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DumpDNSZoneConfigRequest proto.InternalMessageInfo
+
+func (m *DumpDNSZoneConfigRequest) GetZoneName() string {
+	if m != nil {
+		return m.ZoneName
+	}
+	return ""
+}
+
+func (m *DumpDNSZoneConfigRequest) GetViewName() string {
+	if m != nil {
+		return m.ViewName
+	}
+	return ""
+}
+
+type ReloadNginxConfigRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ReloadNginxConfigRequest) Reset()         { *m = ReloadNginxConfigRequest{} }
+func (m *ReloadNginxConfigRequest) String() string { return proto.CompactTextString(m) }
+func (*ReloadNginxConfigRequest) ProtoMessage()    {}
+func (*ReloadNginxConfigRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ddi_d71da4a3bdffe34f, []int{17}
+}
+func (m *ReloadNginxConfigRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ReloadNginxConfigRequest.Unmarshal(m, b)
+}
+func (m *ReloadNginxConfigRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ReloadNginxConfigRequest.Marshal(b, m, deterministic)
+}
+func (dst *ReloadNginxConfigRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ReloadNginxConfigRequest.Merge(dst, src)
+}
+func (m *ReloadNginxConfigRequest) XXX_Size() int {
+	return xxx_messageInfo_ReloadNginxConfigRequest.Size(m)
+}
+func (m *ReloadNginxConfigRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ReloadNginxConfigRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ReloadNginxConfigRequest proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*StartDNSRequest)(nil), "proto.StartDNSRequest")
 	proto.RegisterType((*StartDHCPRequest)(nil), "proto.StartDHCPRequest")
@@ -366,6 +686,14 @@ func init() {
 	proto.RegisterType((*DDIStateResponse)(nil), "proto.DDIStateResponse")
 	proto.RegisterType((*GetInterfacesRequest)(nil), "proto.GetInterfacesRequest")
 	proto.RegisterType((*GetInterfacesResponse)(nil), "proto.GetInterfacesResponse")
+	proto.RegisterType((*ReconfigDNSRequest)(nil), "proto.ReconfigDNSRequest")
+	proto.RegisterType((*ReloadDNSConfigRequest)(nil), "proto.ReloadDNSConfigRequest")
+	proto.RegisterType((*AddDNSZoneRequest)(nil), "proto.AddDNSZoneRequest")
+	proto.RegisterType((*UpdateDNSZoneRequest)(nil), "proto.UpdateDNSZoneRequest")
+	proto.RegisterType((*DeleteDNSZoneRequest)(nil), "proto.DeleteDNSZoneRequest")
+	proto.RegisterType((*DumpDNSAllZonesConfigRequest)(nil), "proto.DumpDNSAllZonesConfigRequest")
+	proto.RegisterType((*DumpDNSZoneConfigRequest)(nil), "proto.DumpDNSZoneConfigRequest")
+	proto.RegisterType((*ReloadNginxConfigRequest)(nil), "proto.ReloadNginxConfigRequest")
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -387,6 +715,14 @@ type DDIMonitorClient interface {
 	GetDNSState(ctx context.Context, in *GetDNSStateRequest, opts ...grpc.CallOption) (*DDIStateResponse, error)
 	GetDHCPState(ctx context.Context, in *GetDHCPStateRequest, opts ...grpc.CallOption) (*DDIStateResponse, error)
 	GetInterfaces(ctx context.Context, in *GetInterfacesRequest, opts ...grpc.CallOption) (*GetInterfacesResponse, error)
+	ReconfigDNS(ctx context.Context, in *ReconfigDNSRequest, opts ...grpc.CallOption) (*DDIMonitorResponse, error)
+	ReloadDNSConfig(ctx context.Context, in *ReloadDNSConfigRequest, opts ...grpc.CallOption) (*DDIMonitorResponse, error)
+	AddDNSZone(ctx context.Context, in *AddDNSZoneRequest, opts ...grpc.CallOption) (*DDIMonitorResponse, error)
+	UpdateDNSZone(ctx context.Context, in *UpdateDNSZoneRequest, opts ...grpc.CallOption) (*DDIMonitorResponse, error)
+	DeleteDNSZone(ctx context.Context, in *DeleteDNSZoneRequest, opts ...grpc.CallOption) (*DDIMonitorResponse, error)
+	DumpDNSAllZonesConfig(ctx context.Context, in *DumpDNSAllZonesConfigRequest, opts ...grpc.CallOption) (*DDIMonitorResponse, error)
+	DumpDNSZoneConfig(ctx context.Context, in *DumpDNSZoneConfigRequest, opts ...grpc.CallOption) (*DDIMonitorResponse, error)
+	ReloadNginxConfig(ctx context.Context, in *ReloadNginxConfigRequest, opts ...grpc.CallOption) (*DDIMonitorResponse, error)
 }
 
 type dDIMonitorClient struct {
@@ -460,6 +796,78 @@ func (c *dDIMonitorClient) GetInterfaces(ctx context.Context, in *GetInterfacesR
 	return out, nil
 }
 
+func (c *dDIMonitorClient) ReconfigDNS(ctx context.Context, in *ReconfigDNSRequest, opts ...grpc.CallOption) (*DDIMonitorResponse, error) {
+	out := new(DDIMonitorResponse)
+	err := c.cc.Invoke(ctx, "/proto.DDIMonitor/ReconfigDNS", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dDIMonitorClient) ReloadDNSConfig(ctx context.Context, in *ReloadDNSConfigRequest, opts ...grpc.CallOption) (*DDIMonitorResponse, error) {
+	out := new(DDIMonitorResponse)
+	err := c.cc.Invoke(ctx, "/proto.DDIMonitor/ReloadDNSConfig", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dDIMonitorClient) AddDNSZone(ctx context.Context, in *AddDNSZoneRequest, opts ...grpc.CallOption) (*DDIMonitorResponse, error) {
+	out := new(DDIMonitorResponse)
+	err := c.cc.Invoke(ctx, "/proto.DDIMonitor/AddDNSZone", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dDIMonitorClient) UpdateDNSZone(ctx context.Context, in *UpdateDNSZoneRequest, opts ...grpc.CallOption) (*DDIMonitorResponse, error) {
+	out := new(DDIMonitorResponse)
+	err := c.cc.Invoke(ctx, "/proto.DDIMonitor/UpdateDNSZone", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dDIMonitorClient) DeleteDNSZone(ctx context.Context, in *DeleteDNSZoneRequest, opts ...grpc.CallOption) (*DDIMonitorResponse, error) {
+	out := new(DDIMonitorResponse)
+	err := c.cc.Invoke(ctx, "/proto.DDIMonitor/DeleteDNSZone", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dDIMonitorClient) DumpDNSAllZonesConfig(ctx context.Context, in *DumpDNSAllZonesConfigRequest, opts ...grpc.CallOption) (*DDIMonitorResponse, error) {
+	out := new(DDIMonitorResponse)
+	err := c.cc.Invoke(ctx, "/proto.DDIMonitor/DumpDNSAllZonesConfig", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dDIMonitorClient) DumpDNSZoneConfig(ctx context.Context, in *DumpDNSZoneConfigRequest, opts ...grpc.CallOption) (*DDIMonitorResponse, error) {
+	out := new(DDIMonitorResponse)
+	err := c.cc.Invoke(ctx, "/proto.DDIMonitor/DumpDNSZoneConfig", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dDIMonitorClient) ReloadNginxConfig(ctx context.Context, in *ReloadNginxConfigRequest, opts ...grpc.CallOption) (*DDIMonitorResponse, error) {
+	out := new(DDIMonitorResponse)
+	err := c.cc.Invoke(ctx, "/proto.DDIMonitor/ReloadNginxConfig", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DDIMonitorServer is the server API for DDIMonitor service.
 type DDIMonitorServer interface {
 	StartDNS(context.Context, *StartDNSRequest) (*DDIMonitorResponse, error)
@@ -469,6 +877,14 @@ type DDIMonitorServer interface {
 	GetDNSState(context.Context, *GetDNSStateRequest) (*DDIStateResponse, error)
 	GetDHCPState(context.Context, *GetDHCPStateRequest) (*DDIStateResponse, error)
 	GetInterfaces(context.Context, *GetInterfacesRequest) (*GetInterfacesResponse, error)
+	ReconfigDNS(context.Context, *ReconfigDNSRequest) (*DDIMonitorResponse, error)
+	ReloadDNSConfig(context.Context, *ReloadDNSConfigRequest) (*DDIMonitorResponse, error)
+	AddDNSZone(context.Context, *AddDNSZoneRequest) (*DDIMonitorResponse, error)
+	UpdateDNSZone(context.Context, *UpdateDNSZoneRequest) (*DDIMonitorResponse, error)
+	DeleteDNSZone(context.Context, *DeleteDNSZoneRequest) (*DDIMonitorResponse, error)
+	DumpDNSAllZonesConfig(context.Context, *DumpDNSAllZonesConfigRequest) (*DDIMonitorResponse, error)
+	DumpDNSZoneConfig(context.Context, *DumpDNSZoneConfigRequest) (*DDIMonitorResponse, error)
+	ReloadNginxConfig(context.Context, *ReloadNginxConfigRequest) (*DDIMonitorResponse, error)
 }
 
 func RegisterDDIMonitorServer(s *grpc.Server, srv DDIMonitorServer) {
@@ -601,6 +1017,150 @@ func _DDIMonitor_GetInterfaces_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DDIMonitor_ReconfigDNS_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReconfigDNSRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DDIMonitorServer).ReconfigDNS(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.DDIMonitor/ReconfigDNS",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DDIMonitorServer).ReconfigDNS(ctx, req.(*ReconfigDNSRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DDIMonitor_ReloadDNSConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReloadDNSConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DDIMonitorServer).ReloadDNSConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.DDIMonitor/ReloadDNSConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DDIMonitorServer).ReloadDNSConfig(ctx, req.(*ReloadDNSConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DDIMonitor_AddDNSZone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddDNSZoneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DDIMonitorServer).AddDNSZone(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.DDIMonitor/AddDNSZone",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DDIMonitorServer).AddDNSZone(ctx, req.(*AddDNSZoneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DDIMonitor_UpdateDNSZone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDNSZoneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DDIMonitorServer).UpdateDNSZone(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.DDIMonitor/UpdateDNSZone",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DDIMonitorServer).UpdateDNSZone(ctx, req.(*UpdateDNSZoneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DDIMonitor_DeleteDNSZone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteDNSZoneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DDIMonitorServer).DeleteDNSZone(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.DDIMonitor/DeleteDNSZone",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DDIMonitorServer).DeleteDNSZone(ctx, req.(*DeleteDNSZoneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DDIMonitor_DumpDNSAllZonesConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DumpDNSAllZonesConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DDIMonitorServer).DumpDNSAllZonesConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.DDIMonitor/DumpDNSAllZonesConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DDIMonitorServer).DumpDNSAllZonesConfig(ctx, req.(*DumpDNSAllZonesConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DDIMonitor_DumpDNSZoneConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DumpDNSZoneConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DDIMonitorServer).DumpDNSZoneConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.DDIMonitor/DumpDNSZoneConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DDIMonitorServer).DumpDNSZoneConfig(ctx, req.(*DumpDNSZoneConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DDIMonitor_ReloadNginxConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReloadNginxConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DDIMonitorServer).ReloadNginxConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.DDIMonitor/ReloadNginxConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DDIMonitorServer).ReloadNginxConfig(ctx, req.(*ReloadNginxConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _DDIMonitor_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "proto.DDIMonitor",
 	HandlerType: (*DDIMonitorServer)(nil),
@@ -633,35 +1193,82 @@ var _DDIMonitor_serviceDesc = grpc.ServiceDesc{
 			MethodName: "GetInterfaces",
 			Handler:    _DDIMonitor_GetInterfaces_Handler,
 		},
+		{
+			MethodName: "ReconfigDNS",
+			Handler:    _DDIMonitor_ReconfigDNS_Handler,
+		},
+		{
+			MethodName: "ReloadDNSConfig",
+			Handler:    _DDIMonitor_ReloadDNSConfig_Handler,
+		},
+		{
+			MethodName: "AddDNSZone",
+			Handler:    _DDIMonitor_AddDNSZone_Handler,
+		},
+		{
+			MethodName: "UpdateDNSZone",
+			Handler:    _DDIMonitor_UpdateDNSZone_Handler,
+		},
+		{
+			MethodName: "DeleteDNSZone",
+			Handler:    _DDIMonitor_DeleteDNSZone_Handler,
+		},
+		{
+			MethodName: "DumpDNSAllZonesConfig",
+			Handler:    _DDIMonitor_DumpDNSAllZonesConfig_Handler,
+		},
+		{
+			MethodName: "DumpDNSZoneConfig",
+			Handler:    _DDIMonitor_DumpDNSZoneConfig_Handler,
+		},
+		{
+			MethodName: "ReloadNginxConfig",
+			Handler:    _DDIMonitor_ReloadNginxConfig_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "ddi.proto",
 }
 
-func init() { proto.RegisterFile("ddi.proto", fileDescriptor_ddi_3631ff8d3b74ddf5) }
+func init() { proto.RegisterFile("ddi.proto", fileDescriptor_ddi_d71da4a3bdffe34f) }
 
-var fileDescriptor_ddi_3631ff8d3b74ddf5 = []byte{
-	// 345 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x92, 0x4b, 0x4f, 0xf2, 0x40,
-	0x14, 0x86, 0xe1, 0x23, 0x9f, 0xd0, 0x83, 0x17, 0x3c, 0x72, 0xa9, 0x55, 0x13, 0xd2, 0x15, 0x2b,
-	0x12, 0x2f, 0x61, 0x67, 0x8c, 0xa1, 0x06, 0x48, 0xd4, 0x90, 0x76, 0xe9, 0xc2, 0x20, 0x8c, 0x66,
-	0x36, 0x33, 0xb5, 0x33, 0xfc, 0x69, 0x7f, 0x85, 0xa1, 0x9d, 0xa1, 0x33, 0xad, 0xe9, 0x8a, 0xf0,
-	0xcc, 0x99, 0xa7, 0x99, 0xf7, 0x3d, 0xe0, 0x6c, 0x36, 0x74, 0x1c, 0x27, 0x5c, 0x72, 0xfc, 0x9f,
-	0xfe, 0xf8, 0xa7, 0x70, 0x12, 0xc9, 0x55, 0x22, 0x83, 0xd7, 0x28, 0x24, 0xdf, 0x5b, 0x22, 0xa4,
-	0x8f, 0xd0, 0xc9, 0xd0, 0x7c, 0xba, 0xd4, 0xac, 0x03, 0xc7, 0x91, 0xe4, 0xb1, 0x31, 0x95, 0x5e,
-	0xe4, 0xb1, 0x39, 0x34, 0x06, 0x0c, 0x82, 0xc5, 0x0b, 0x67, 0x54, 0xf2, 0x24, 0x24, 0x22, 0xe6,
-	0x4c, 0x10, 0x74, 0xa1, 0x29, 0xb6, 0xeb, 0x35, 0x21, 0x1b, 0xb7, 0x3e, 0xac, 0x8f, 0x5a, 0xa1,
-	0xfe, 0xeb, 0x77, 0x01, 0x67, 0x64, 0xf7, 0xe5, 0x48, 0xae, 0x24, 0xd1, 0x96, 0x1e, 0x9c, 0xed,
-	0xe8, 0x7c, 0xba, 0xb4, 0xf0, 0x35, 0x74, 0x82, 0x60, 0xa1, 0x90, 0x52, 0x5f, 0x01, 0x50, 0xf1,
-	0x9e, 0x6c, 0x19, 0xa3, 0xec, 0x4b, 0xd9, 0x1d, 0x2a, 0xc2, 0x0c, 0xf8, 0x7d, 0xe8, 0xce, 0x88,
-	0x5c, 0x30, 0x49, 0x92, 0xcf, 0xd5, 0x9a, 0x08, 0xad, 0x7a, 0x83, 0x5e, 0x81, 0x2b, 0xdf, 0x10,
-	0xda, 0x74, 0x4f, 0xef, 0xdc, 0xfa, 0xb0, 0x31, 0x72, 0x42, 0x13, 0xd9, 0x13, 0x13, 0xf7, 0x5f,
-	0x71, 0x62, 0x72, 0xf3, 0xd3, 0x00, 0xc8, 0x53, 0xc0, 0x07, 0x68, 0xe9, 0x7c, 0xb1, 0x9f, 0x45,
-	0x3f, 0x2e, 0x04, 0xee, 0x9d, 0x2b, 0x5e, 0x0e, 0xcf, 0xaf, 0xe1, 0x23, 0x38, 0xfb, 0x36, 0x70,
-	0x60, 0x19, 0xf2, 0xe8, 0xab, 0x15, 0xf7, 0xd0, 0x54, 0xe5, 0x61, 0x6f, 0x2f, 0x30, 0xcb, 0xac,
-	0xbe, 0x9e, 0x3e, 0x21, 0x6b, 0xda, 0x78, 0x82, 0x55, 0x7d, 0xb5, 0x60, 0x0a, 0x6d, 0xa3, 0x67,
-	0xd4, 0xb3, 0xe5, 0xee, 0xbd, 0x41, 0xae, 0xb1, 0x9a, 0xf6, 0x6b, 0xf8, 0x04, 0x87, 0xe6, 0x5a,
-	0xa0, 0x67, 0x58, 0x0a, 0xbb, 0x52, 0xa5, 0x79, 0x86, 0x23, 0xab, 0x7b, 0xbc, 0xc8, 0x3d, 0xa5,
-	0x4d, 0xf1, 0x2e, 0xff, 0x3e, 0xd4, 0xb6, 0x8f, 0x83, 0xf4, 0xf8, 0xf6, 0x37, 0x00, 0x00, 0xff,
-	0xff, 0x02, 0x81, 0x64, 0x06, 0x58, 0x03, 0x00, 0x00,
+var fileDescriptor_ddi_d71da4a3bdffe34f = []byte{
+	// 580 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x94, 0x4d, 0x6f, 0xd3, 0x4c,
+	0x14, 0x85, 0x9b, 0x56, 0xef, 0xdb, 0xf8, 0x86, 0xd2, 0x64, 0x48, 0x52, 0x93, 0xb6, 0x10, 0x99,
+	0x4d, 0x57, 0x91, 0xf8, 0x50, 0x77, 0x08, 0x45, 0x31, 0xb4, 0x91, 0x68, 0x14, 0x1c, 0x58, 0x00,
+	0x8b, 0xca, 0xc4, 0x37, 0xd1, 0x20, 0x67, 0x26, 0xc4, 0x13, 0x40, 0xfc, 0x56, 0x7e, 0x0c, 0xf2,
+	0xc7, 0xd8, 0x33, 0x71, 0x98, 0x2c, 0x40, 0xac, 0xaa, 0x9e, 0x73, 0xe7, 0x99, 0xde, 0xa9, 0xcf,
+	0x01, 0x2b, 0x08, 0x68, 0x6f, 0xb9, 0xe2, 0x82, 0x93, 0xff, 0x92, 0x1f, 0x4e, 0x03, 0x8e, 0x27,
+	0xc2, 0x5f, 0x09, 0x77, 0x34, 0xf1, 0xf0, 0xcb, 0x1a, 0x23, 0xe1, 0x10, 0xa8, 0xa7, 0xd2, 0xf5,
+	0x60, 0x2c, 0xb5, 0x3a, 0xdc, 0x9d, 0x08, 0xbe, 0x54, 0xa6, 0x92, 0x83, 0x7c, 0xa9, 0x0e, 0xf5,
+	0x80, 0xb8, 0xee, 0xf0, 0x86, 0x33, 0x2a, 0xf8, 0xca, 0xc3, 0x68, 0xc9, 0x59, 0x84, 0xc4, 0x86,
+	0xc3, 0x68, 0x3d, 0x9d, 0x22, 0x06, 0x76, 0xa5, 0x5b, 0xb9, 0xa8, 0x7a, 0xf2, 0x57, 0xa7, 0x09,
+	0xe4, 0x0a, 0xe3, 0x9b, 0x27, 0xc2, 0x17, 0x28, 0x29, 0x2d, 0xb8, 0x17, 0xab, 0xd7, 0x83, 0xb1,
+	0x26, 0x3f, 0x86, 0xba, 0xeb, 0x0e, 0x33, 0x29, 0x43, 0x9f, 0x03, 0xd0, 0xe8, 0x76, 0xb5, 0x66,
+	0x8c, 0xb2, 0x79, 0x46, 0xb7, 0x68, 0xe4, 0xa5, 0x82, 0xd3, 0x86, 0xe6, 0x15, 0x8a, 0x21, 0x13,
+	0xb8, 0x9a, 0xf9, 0x53, 0x8c, 0x24, 0xea, 0x23, 0xb4, 0x36, 0xf4, 0x8c, 0xd7, 0x85, 0x1a, 0xcd,
+	0xd5, 0x67, 0x76, 0xa5, 0x7b, 0x70, 0x61, 0x79, 0xaa, 0xa4, 0x4f, 0x5c, 0xda, 0xfb, 0x9b, 0x13,
+	0x97, 0xf1, 0x52, 0x1e, 0x4e, 0x39, 0x9b, 0xd1, 0xb9, 0xf2, 0x5a, 0x36, 0xb4, 0x3d, 0x0c, 0xb9,
+	0x1f, 0xb8, 0xa3, 0xc9, 0x20, 0x31, 0xa5, 0xf3, 0x19, 0x1a, 0xfd, 0x20, 0x96, 0x3f, 0x70, 0x26,
+	0x97, 0x25, 0xa7, 0x60, 0xfd, 0xe0, 0x0c, 0x6f, 0x99, 0xbf, 0xc0, 0x64, 0x2f, 0xcb, 0xab, 0xc6,
+	0xc2, 0xc8, 0x5f, 0x60, 0x6c, 0x7e, 0xa5, 0xf8, 0x2d, 0x35, 0xf7, 0x53, 0x33, 0x16, 0xa4, 0x99,
+	0x9c, 0x9c, 0xd1, 0x10, 0xed, 0x83, 0xe2, 0xe4, 0x2b, 0x1a, 0xa2, 0xb3, 0x80, 0xe6, 0xbb, 0x65,
+	0xe0, 0x0b, 0xfc, 0x37, 0xd7, 0x8d, 0xa1, 0xe9, 0x62, 0x88, 0x7f, 0xef, 0x3a, 0xe7, 0x01, 0x9c,
+	0xb9, 0xeb, 0x45, 0xfc, 0x19, 0xf6, 0xc3, 0x30, 0x46, 0x46, 0xfa, 0x63, 0xbe, 0x05, 0x3b, 0xf3,
+	0x63, 0x53, 0xf3, 0xfe, 0xe0, 0xd6, 0x0e, 0xd8, 0xe9, 0x3f, 0x6f, 0x34, 0xa7, 0xec, 0xbb, 0x46,
+	0x7d, 0xf2, 0xb3, 0x0a, 0x50, 0x7c, 0xf4, 0xe4, 0x05, 0x54, 0x65, 0x9c, 0x48, 0x3b, 0x4d, 0x5a,
+	0x6f, 0x23, 0x5f, 0x9d, 0xfb, 0x99, 0x5e, 0xce, 0x8a, 0xb3, 0x47, 0xfa, 0x60, 0xe5, 0xe1, 0x23,
+	0x27, 0x1a, 0xa1, 0x48, 0x9a, 0x19, 0xf1, 0x1c, 0x0e, 0xb3, 0xac, 0x92, 0x56, 0x0e, 0x50, 0xb3,
+	0x6b, 0x3e, 0x9e, 0xac, 0x90, 0x06, 0x5b, 0x59, 0x41, 0x4b, 0xba, 0x19, 0x30, 0x80, 0x9a, 0x12,
+	0x6b, 0x22, 0x67, 0xcb, 0x51, 0xef, 0x9c, 0x14, 0x18, 0x2d, 0xd8, 0xce, 0x1e, 0x79, 0x09, 0x77,
+	0xd4, 0x16, 0x20, 0x1d, 0x85, 0xb2, 0x51, 0x0d, 0x26, 0xcc, 0x6b, 0x38, 0xd2, 0xa2, 0x4e, 0x4e,
+	0x0b, 0x4e, 0xa9, 0x18, 0x3a, 0x67, 0xdb, 0x4d, 0xe5, 0x8f, 0xaa, 0x29, 0xd9, 0xce, 0x37, 0x2b,
+	0xe7, 0xdd, 0xfc, 0x40, 0x37, 0x70, 0xbc, 0x51, 0x06, 0xe4, 0x3c, 0x47, 0x6d, 0x2b, 0x89, 0x5d,
+	0xef, 0x0d, 0x45, 0x83, 0x10, 0x3b, 0x1b, 0x2d, 0x95, 0x8a, 0x19, 0x32, 0x84, 0x23, 0xad, 0x1a,
+	0xf2, 0x87, 0xda, 0x56, 0x18, 0x3b, 0x51, 0x5a, 0xec, 0x73, 0xd4, 0xb6, 0x32, 0x30, 0xa3, 0xde,
+	0x43, 0x6b, 0x6b, 0xde, 0xc9, 0x23, 0x79, 0xca, 0xd0, 0x06, 0x66, 0xf4, 0x1b, 0x68, 0x94, 0xaa,
+	0x82, 0x3c, 0xd4, 0xb1, 0xa5, 0x12, 0xd9, 0x89, 0x2c, 0xf5, 0x44, 0x8e, 0xfc, 0x5d, 0x83, 0x18,
+	0x91, 0x9f, 0xfe, 0x4f, 0xbc, 0xa7, 0xbf, 0x02, 0x00, 0x00, 0xff, 0xff, 0x77, 0x80, 0x33, 0x00,
+	0xb9, 0x07, 0x00, 0x00,
 }

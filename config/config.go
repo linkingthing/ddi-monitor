@@ -36,7 +36,9 @@ type PrometheusConf struct {
 }
 
 type DNSConf struct {
+	Addr      string `yaml:"addr"`
 	ConfigDir string `yaml:"config_dir"`
+	ProxyPort int    `yaml:"proxy_port"`
 }
 
 func LoadConfig(path string) (*MonitorConfig, error) {
