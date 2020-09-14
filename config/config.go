@@ -36,7 +36,7 @@ type PrometheusConf struct {
 }
 
 type DNSConf struct {
-	Addr      string `yaml:"addr"`
+	Ip        string `yaml:"ip"`
 	ConfigDir string `yaml:"config_dir"`
 	ProxyPort int    `yaml:"proxy_port"`
 }

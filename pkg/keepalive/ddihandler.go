@@ -25,21 +25,22 @@ type DDIHandler struct {
 	dnsConfigCmdPrefix string
 }
 
-func newDDIHandler(dnsAddr, dnsDir string, dnsProxyPort int) *DDIHandler {
-	var buf bytes.Buffer
-	buf.WriteString(filepath.Join(dnsDir, "rndc"))
-	buf.WriteString(" -c ")
-	buf.WriteString(filepath.Join(dnsDir, "rndc.conf"))
-	buf.WriteString(" -s ")
-	buf.WriteString(dnsAddr)
-	buf.WriteString(" -p ")
-	buf.WriteString(strconv.Itoa(dnsProxyPort))
-
+func newDDIHandler(dnsIp, dnsDir string, dnsProxyPort int) *DDIHandler {
 	return &DDIHandler{
-		dnsStartCmd:        filepath.Join(dnsDir, "named") + " -c " + filepath.Join(dnsDir, "named.conf"),
-		dnsStopCmd:         filepath.Join(dnsDir, "rndc") + " stop",
-		dnsConfigCmdPrefix: buf.String(),
+		dnsStartCmd: joinStringWithSpace(filepath.Join(dnsDir, DNSName), "-c", filepath.Join(dnsDir, DNSConfName)),
+		dnsStopCmd:  joinStringWithSpace(filepath.Join(dnsDir, DNSProxy), "stop"),
+		dnsConfigCmdPrefix: joinStringWithSpace(filepath.Join(dnsDir, DNSProxy), "-c", filepath.Join(dnsDir, DNSProxyConfName),
+			"-s", dnsIp, "-p", strconv.Itoa(dnsProxyPort)),
 	}
+}
+
+func joinStringWithSpace(params ...string) string {
+	var buf bytes.Buffer
+	for _, param := range params {
+		buf.WriteString(" ")
+		buf.WriteString(param)
+	}
+	return buf.String()
 }
 
 func (h *DDIHandler) startDNS(req *pb.StartDNSRequest) error {
@@ -80,13 +81,7 @@ func (h *DDIHandler) reconfigDNS() error {
 }
 
 func (h *DDIHandler) genDnsCmd(params ...string) string {
-	var buf bytes.Buffer
-	for _, param := range params {
-		buf.WriteString(" ")
-		buf.WriteString(param)
-	}
-
-	return h.dnsConfigCmdPrefix + buf.String()
+	return h.dnsConfigCmdPrefix + joinStringWithSpace(params...)
 }
 
 func (h *DDIHandler) reloadDNS() error {
@@ -94,11 +89,11 @@ func (h *DDIHandler) reloadDNS() error {
 }
 
 func (h *DDIHandler) addDNSZone(req *pb.AddDNSZoneRequest) error {
-	return runCommand(h.genDnsCmd("addzone", req.GetZoneName(), "in", req.GetViewName(), "{ type master; file \""+req.GetZoneFile()+"\";};"))
+	return runCommand(h.genDnsCmd("addzone", req.GetZoneName(), "in", req.GetViewName(), "'{ type master; file \""+req.GetZoneFile()+"\";};'"))
 }
 
 func (h *DDIHandler) updateDNSZone(req *pb.UpdateDNSZoneRequest) error {
-	return runCommand(h.genDnsCmd("modzone", req.GetZoneName(), "in", req.GetViewName(), "{ type master; file \""+req.GetZoneFile()+"\";};"))
+	return runCommand(h.genDnsCmd("modzone", req.GetZoneName(), "in", req.GetViewName(), "'{ type master; file \""+req.GetZoneFile()+"\";};'"))
 }
 
 func (h *DDIHandler) deleteDNSZone(req *pb.DeleteDNSZoneRequest) error {

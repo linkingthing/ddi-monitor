@@ -13,7 +13,7 @@ type DDIService struct {
 }
 
 func NewDDIService(conf *config.MonitorConfig) *DDIService {
-	return &DDIService{handler: newDDIHandler(conf.DNS.Addr, conf.DNS.ConfigDir, conf.DNS.ProxyPort)}
+	return &DDIService{handler: newDDIHandler(conf.DNS.Ip, conf.DNS.ConfigDir, conf.DNS.ProxyPort)}
 }
 
 func (s *DDIService) StartDNS(ctx context.Context, req *pb.StartDNSRequest) (*pb.DDIMonitorResponse, error) {
