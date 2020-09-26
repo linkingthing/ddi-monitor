@@ -20,8 +20,9 @@ import (
 	"os"
 	"sort"
 
-	"github.com/prometheus/common/promlog"
 	"github.com/prometheus/common/promlog/flag"
+
+	"github.com/prometheus/common/promlog"
 	"gopkg.in/alecthomas/kingpin.v2"
 
 	"github.com/go-kit/kit/log"
@@ -143,9 +144,9 @@ func (h *handler) innerHandler(filters ...string) (http.Handler, error) {
 
 func NodeExporter(conf *config.MonitorConfig) {
 	promlogConfig := &promlog.Config{}
-	flag.AddFlags(kingpin.CommandLine, promlogConfig)
-	kingpin.Version(version.Print("node_exporter"))
-	kingpin.Parse()
+	app := kingpin.UsageTemplate(kingpin.CompactUsageTemplate).Version(version.Print("node_exporter"))
+	flag.AddFlags(app, promlogConfig)
+	app.Parse(nil)
 	logger := promlog.New(promlogConfig)
 
 	level.Info(logger).Log("msg", "Starting node_exporter", "version", version.Info())
