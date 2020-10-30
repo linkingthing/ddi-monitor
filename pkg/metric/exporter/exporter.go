@@ -17,8 +17,8 @@ import (
 	"fmt"
 	"net/http"
 	_ "net/http/pprof"
-	"os"
 	"sort"
+	"time"
 
 	"github.com/prometheus/common/promlog/flag"
 
@@ -156,8 +156,11 @@ func NodeExporter(conf *config.MonitorConfig) {
 
 	level.Info(logger).Log("msg", "Listening on", "address", ":"+conf.Server.ExporterPort)
 	server := &http.Server{Addr: ":" + conf.Server.ExporterPort}
-	if err := https.Listen(server, ""); err != nil {
-		level.Error(logger).Log("err", err)
-		os.Exit(1)
+	err := https.Listen(server, "")
+	for err != nil {
+		if err = https.Listen(server, ""); err != nil {
+			level.Error(logger).Log("err", err)
+		}
+		time.Sleep(time.Second * time.Duration(conf.Server.ProbeInterval))
 	}
 }

@@ -51,6 +51,11 @@ func Run(conn *grpc.ClientConn, conf *config.MonitorConfig) {
 
 			if _, err := cli.KeepAlive(context.Background(), &req); err != nil {
 				log.Warnf("grpc client exec KeepAliveReq failed: %s", err.Error())
+				if conn, err = grpc.Dial(conf.ControllerAddr, grpc.WithInsecure()); err != nil {
+					log.Fatalf("reDial controller grpc server failed: %s", err.Error())
+					continue
+				}
+				cli = pb.NewMonitorManagerClient(conn)
 			}
 		}
 	}
