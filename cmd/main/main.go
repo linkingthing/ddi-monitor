@@ -4,13 +4,13 @@ import (
 	"flag"
 
 	"github.com/zdnscloud/cement/log"
-	"google.golang.org/grpc"
 
+	"github.com/linkingthing/ddi-controller/pkg/metric"
 	"github.com/linkingthing/ddi-monitor/config"
+	"github.com/linkingthing/ddi-monitor/pkg/db"
 	"github.com/linkingthing/ddi-monitor/pkg/grpcserver"
 	"github.com/linkingthing/ddi-monitor/pkg/keepalive"
 	"github.com/linkingthing/ddi-monitor/pkg/metric/exporter"
-	"github.com/linkingthing/ddi-monitor/pkg/register"
 )
 
 var (
@@ -27,19 +27,20 @@ func main() {
 		log.Fatalf("load config file failed: %s", err.Error())
 	}
 
-	conn, err := grpc.Dial(conf.ControllerAddr, grpc.WithInsecure())
-	if err != nil {
-		log.Fatalf("dial controller grpc server failed: %s", err.Error())
+	db.RegisterResources(metric.PersistentResources()...)
+	if err := db.Init(conf); err != nil {
+		log.Fatalf("init db failed: %s", err.Error())
 	}
-	defer conn.Close()
 
-	register.Register(conn, conf)
+	if err := keepalive.NewMonitorNode(conf); err != nil {
+		log.Fatalf("register node failed: %s", err.Error())
+	}
+
 	grcpServer, err := grpcserver.New(conf)
 	if err != nil {
 		log.Fatalf("new grpc server failed: %s", err.Error())
 	}
 
 	go exporter.NodeExporter(conf)
-	go keepalive.Run(conn, conf)
 	grcpServer.Run()
 }

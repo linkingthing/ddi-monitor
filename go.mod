@@ -5,12 +5,13 @@ go 1.13
 require (
 	github.com/go-kit/kit v0.10.0
 	github.com/golang/protobuf v1.4.2
-	github.com/prometheus/client_golang v1.6.0
+	github.com/linkingthing/ddi-controller v1.2.0
+	github.com/prometheus/client_golang v1.7.1
 	github.com/prometheus/common v0.10.0
 	github.com/prometheus/node_exporter v1.0.0-rc.0.0.20200302152451-0107bc794204
-	github.com/zdnscloud/cement v0.0.0-20200503120134-aa381f4206fe
-	golang.org/x/net v0.0.0-20200202094626-16171245cfb2
-	google.golang.org/grpc v1.29.1
-	google.golang.org/protobuf v1.24.0 // indirect
+	github.com/zdnscloud/cement v0.0.0-20200612070849-67372f989797
+	github.com/zdnscloud/gorest v0.0.0-20200909072941-55569cb2f203
+	golang.org/x/net v0.0.0-20200602114024-627f9648deb9
+	google.golang.org/grpc v1.32.0
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 )

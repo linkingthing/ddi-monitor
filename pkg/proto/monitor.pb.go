@@ -6,11 +6,12 @@ package proto
 import (
 	context "context"
 	fmt "fmt"
+	math "math"
+
 	proto "github.com/golang/protobuf/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -394,7 +395,7 @@ func (c *monitorManagerClient) Register(ctx context.Context, in *RegisterReq, op
 
 func (c *monitorManagerClient) KeepAlive(ctx context.Context, in *KeepAliveReq, opts ...grpc.CallOption) (*KeepAliveResp, error) {
 	out := new(KeepAliveResp)
-	err := c.cc.Invoke(ctx, "/proto.MonitorManager/KeepAlive", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/proto.MonitorManager/updateKeepAliveToDB", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -415,7 +416,7 @@ func (*UnimplementedMonitorManagerServer) Register(ctx context.Context, req *Reg
 	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
 }
 func (*UnimplementedMonitorManagerServer) KeepAlive(ctx context.Context, req *KeepAliveReq) (*KeepAliveResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method KeepAlive not implemented")
+	return nil, status.Errorf(codes.Unimplemented, "method updateKeepAliveToDB not implemented")
 }
 
 func RegisterMonitorManagerServer(s *grpc.Server, srv MonitorManagerServer) {
@@ -450,7 +451,7 @@ func _MonitorManager_KeepAlive_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.MonitorManager/KeepAlive",
+		FullMethod: "/proto.MonitorManager/updateKeepAliveToDB",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MonitorManagerServer).KeepAlive(ctx, req.(*KeepAliveReq))
@@ -467,7 +468,7 @@ var _MonitorManager_serviceDesc = grpc.ServiceDesc{
 			Handler:    _MonitorManager_Register_Handler,
 		},
 		{
-			MethodName: "KeepAlive",
+			MethodName: "updateKeepAliveToDB",
 			Handler:    _MonitorManager_KeepAlive_Handler,
 		},
 	},

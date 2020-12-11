@@ -1,68 +1,14 @@
 package keepalive
 
 import (
-	"context"
 	"fmt"
 	"net"
 	"strings"
-	"time"
-
-	"github.com/zdnscloud/cement/log"
-	"github.com/zdnscloud/cement/shell"
-	"google.golang.org/grpc"
 
 	"github.com/linkingthing/ddi-monitor/config"
-	pb "github.com/linkingthing/ddi-monitor/pkg/proto"
-	"github.com/linkingthing/ddi-monitor/pkg/util"
+
+	"github.com/zdnscloud/cement/shell"
 )
-
-func Run(conn *grpc.ClientConn, conf *config.MonitorConfig) {
-	cli := pb.NewMonitorManagerClient(conn)
-	ticker := time.NewTicker(time.Duration(conf.Server.ProbeInterval) * time.Second)
-	defer ticker.Stop()
-
-	for {
-		select {
-		case <-ticker.C:
-			var err error
-			req := pb.KeepAliveReq{
-				IP:           conf.Server.IP,
-				Master:       conf.Master,
-				Roles:        util.GetPbRoles(conf.Server.Roles),
-				ControllerIP: strings.Split(conf.ControllerAddr, ":")[0],
-			}
-
-			if req.DnsAlive, err = checkDNSIsRunning(); err != nil {
-				log.Warnf("check dns running failed:%s", err.Error())
-				continue
-			}
-
-			if req.DhcpAlive, err = checkDHCPIsRunning(); err != nil {
-				log.Warnf("check dhcp running failed:%s", err.Error())
-				continue
-			}
-
-			if isLocalVip, err := isVIPOnLocal(conf.VIP); err != nil {
-				log.Warnf("isVIPOnLocal err:%s", err.Error())
-				req.Vip = ""
-			} else if isLocalVip {
-				req.Vip = conf.VIP
-			}
-
-			if _, err := cli.KeepAlive(context.Background(), &req); err != nil {
-				log.Warnf("grpc client exec KeepAliveReq failed: %s", err.Error())
-				if conn_, err := grpc.Dial(conf.ControllerAddr, grpc.WithInsecure()); err != nil {
-					log.Warnf("reDial controller grpc server failed: %s", err.Error())
-					continue
-				} else {
-					conn.Close()
-					conn = conn_
-					cli = pb.NewMonitorManagerClient(conn)
-				}
-			}
-		}
-	}
-}
 
 func checkDHCPIsRunning() (bool, error) {
 	ret, err := shell.Shell("ps", "-eaf")
@@ -104,4 +50,19 @@ func isVIPOnLocal(vip string) (bool, error) {
 	}
 
 	return false, nil
+}
+
+func formatRoles(monitorRoles []config.ServiceRole) []string {
+	var roles []string
+	for _, pbRole := range monitorRoles {
+		switch pbRole {
+		case config.ServiceRoleController:
+			roles = append(roles, string(config.ServiceRoleController))
+		case config.ServiceRoleDNS:
+			roles = append(roles, string(config.ServiceRoleDNS))
+		case config.ServiceRoleDHCP:
+			roles = append(roles, string(config.ServiceRoleDHCP))
+		}
+	}
+	return roles
 }
