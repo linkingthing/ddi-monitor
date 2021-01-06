@@ -2,13 +2,13 @@ package main
 
 import (
 	"flag"
+	"time"
 
 	"github.com/zdnscloud/cement/log"
 
-	"github.com/linkingthing/ddi-controller/pkg/metric"
 	"github.com/linkingthing/ddi-monitor/config"
-	"github.com/linkingthing/ddi-monitor/pkg/db"
 	"github.com/linkingthing/ddi-monitor/pkg/grpcserver"
+	"github.com/linkingthing/ddi-monitor/pkg/ha"
 	"github.com/linkingthing/ddi-monitor/pkg/keepalive"
 	"github.com/linkingthing/ddi-monitor/pkg/metric/exporter"
 )
@@ -27,13 +27,11 @@ func main() {
 		log.Fatalf("load config file failed: %s", err.Error())
 	}
 
-	db.RegisterResources(metric.PersistentResources()...)
-	if err := db.Init(conf); err != nil {
-		log.Fatalf("init db failed: %s", err.Error())
-	}
-
-	if err := keepalive.NewMonitorNode(conf); err != nil {
-		log.Fatalf("register node failed: %s", err.Error())
+	err = keepalive.NewMonitorNode(conf)
+	for err != nil {
+		log.Errorf("register node failed: %s", err.Error())
+		time.Sleep(3 * time.Second)
+		err = keepalive.NewMonitorNode(conf)
 	}
 
 	grcpServer, err := grpcserver.New(conf)
@@ -42,5 +40,7 @@ func main() {
 	}
 
 	go exporter.NodeExporter(conf)
+	go ha.Server(conf)
+
 	grcpServer.Run()
 }

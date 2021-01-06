@@ -10,17 +10,35 @@ const (
 	ServiceRoleDHCP       ServiceRole = "dhcp"
 	ServiceRoleDNS        ServiceRole = "dns"
 	ServiceRoleController ServiceRole = "controller"
+
+	ActionStartHa    string = "start_ha"
+	ActionMasterUp   string = "master_up"
+	ActionMasterDown string = "master_down"
+	ActionRegister          = "register"
+	ActionKeepalive         = "keepalive"
+)
+
+const (
+	AuthKey  = "authorization"
+	Username = "systemapi"
+	Password = "systemapi"
 )
 
 type MonitorConfig struct {
-	Path         string         `yaml:"-"`
-	DB           DBConf         `yaml:"db"`
-	Server       ServerConf     `yaml:"server"`
-	ControllerIp string         `yaml:"controller_ip"`
-	Prometheus   PrometheusConf `yaml:"prometheus"`
-	Master       string         `yaml:"master"`
-	VIP          string         `yaml:"vip"`
-	DNS          DNSConf        `yaml:"dns"`
+	Path       string         `yaml:"-"`
+	Server     ServerConf     `yaml:"server"`
+	Controller ControllerConf `yaml:"controller"`
+	Prometheus PrometheusConf `yaml:"prometheus"`
+	Master     string         `yaml:"master"`
+	VIP        string         `yaml:"vip"`
+	DNS        DNSConf        `yaml:"dns"`
+	PgHaCliDir string         `yaml:"pgha_cli_dir"`
+}
+
+type ControllerConf struct {
+	Ip    string `yaml:"ip"`
+	ApiIp string `yaml:"api_ip"`
+	Port  int    `yaml:"port"`
 }
 
 type ServerConf struct {
@@ -30,14 +48,7 @@ type ServerConf struct {
 	ProbeInterval int           `yaml:"probe_interval"`
 	ExporterPort  string        `yaml:"exporter_port"`
 	GrpcAddr      string        `yaml:"grpc_addr"`
-}
-
-type DBConf struct {
-	Name     string `yaml:"name"`
-	User     string `yaml:"user"`
-	Password string `yaml:"password"`
-	Port     int    `yaml:"port"`
-	Host     string `json:"host"`
+	HaHttpPort    int           `yaml:"ha_http_port"`
 }
 
 type PrometheusConf struct {

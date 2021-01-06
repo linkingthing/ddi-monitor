@@ -5,9 +5,9 @@ import (
 	"net"
 	"strings"
 
-	"github.com/linkingthing/ddi-monitor/config"
-
 	"github.com/zdnscloud/cement/shell"
+
+	"github.com/linkingthing/ddi-monitor/config"
 )
 
 func checkDHCPIsRunning() (bool, error) {
@@ -15,7 +15,8 @@ func checkDHCPIsRunning() (bool, error) {
 	if err != nil {
 		return false, fmt.Errorf("exec shell ps -eaf err:%s", err.Error())
 	}
-	if strings.Index(ret, "kea-dhcp6 -c ") > 0 && strings.Index(ret, "kea-dhcp4 -c ") > 0 && strings.Index(ret, "kea-ctrl-agent -c ") > 0 {
+	if strings.Index(ret, "kea-dhcp6 -c ") > 0 &&
+		strings.Index(ret, "kea-dhcp4 -c ") > 0 && strings.Index(ret, "kea-ctrl-agent -c ") > 0 {
 		return true, nil
 	}
 	return false, nil
@@ -32,7 +33,7 @@ func checkDNSIsRunning() (bool, error) {
 	return false, nil
 }
 
-func isVIPOnLocal(vip string) (bool, error) {
+func IsVIPOnLocal(vip string) (bool, error) {
 	addrs, err := net.InterfaceAddrs()
 	if err != nil {
 		return false, fmt.Errorf("InterfaceAddrs err:%s", err.Error())
