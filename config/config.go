@@ -10,6 +10,7 @@ const (
 	ServiceRoleDHCP       ServiceRole = "dhcp"
 	ServiceRoleDNS        ServiceRole = "dns"
 	ServiceRoleController ServiceRole = "controller"
+	ServiceRoleDataCenter ServiceRole = "dataCenter"
 
 	ActionStartHa    string = "start_ha"
 	ActionMasterUp   string = "master_up"

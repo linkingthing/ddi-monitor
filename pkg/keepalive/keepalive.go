@@ -63,6 +63,8 @@ func formatRoles(monitorRoles []config.ServiceRole) []string {
 			roles = append(roles, string(config.ServiceRoleDNS))
 		case config.ServiceRoleDHCP:
 			roles = append(roles, string(config.ServiceRoleDHCP))
+		case config.ServiceRoleDataCenter:
+			roles = append(roles, string(config.ServiceRoleDataCenter))
 		}
 	}
 	return roles
