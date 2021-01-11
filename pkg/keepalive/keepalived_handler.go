@@ -17,13 +17,16 @@ type MonitorNode struct {
 	ControllerAddr string       `json:"-"`
 	Client         *http.Client `json:"-"`
 	ID             string       `json:"id"`
+	Ip             string       `json:"ip"`
 	Roles          []string     `json:"roles"`
 	HostName       string       `json:"hostName"`
+	NodeIsAlive    bool         `json:"nodeIsAlive"`
+	DhcpIsAlive    bool         `json:"dhcpIsAlive"`
+	DnsIsAlive     bool         `json:"dnsIsAlive"`
 	Master         string       `json:"master"`
-	ControllerIp   string       `json:"controllerIp"`
+	ControllerIp   string       `json:"controllerIP"`
 	StartTime      time.Time    `json:"startTime"`
-	DnsAlive       bool         `json:"dnsAlive"`
-	DhcpAlive      bool         `json:"dhcpAlive"`
+	UpdateTime     time.Time    `json:"updateTime"`
 	Vip            string       `json:"vip"`
 }
 
@@ -37,13 +40,16 @@ func NewMonitorNode(conf *config.MonitorConfig) error {
 			},
 		},
 		ID:           conf.Server.IP,
+		Ip:           conf.Server.IP,
 		Roles:        formatRoles(conf.Server.Roles),
 		HostName:     conf.Server.HostName,
 		Master:       conf.Master,
 		ControllerIp: conf.Controller.Ip,
 		StartTime:    time.Now(),
-		DnsAlive:     false,
-		DhcpAlive:    false,
+		UpdateTime:   time.Now(),
+		DnsIsAlive:   false,
+		DhcpIsAlive:  false,
+		NodeIsAlive:  true,
 		Vip:          conf.VIP,
 	}
 
@@ -63,12 +69,12 @@ func (monitorNode *MonitorNode) RunKeepalive(conf *config.MonitorConfig) {
 		select {
 		case <-ticker.C:
 			var err error
-			if monitorNode.DnsAlive, err = checkDNSIsRunning(); err != nil {
+			if monitorNode.DnsIsAlive, err = checkDNSIsRunning(); err != nil {
 				log.Warnf("check dns running failed:%s", err.Error())
 				continue
 			}
 
-			if monitorNode.DhcpAlive, err = checkDHCPIsRunning(); err != nil {
+			if monitorNode.DhcpIsAlive, err = checkDHCPIsRunning(); err != nil {
 				log.Warnf("check dhcp running failed:%s", err.Error())
 				continue
 			}
