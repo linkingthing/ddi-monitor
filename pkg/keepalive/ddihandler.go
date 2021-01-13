@@ -89,19 +89,27 @@ func (h *DDIHandler) reloadDNS() error {
 }
 
 func (h *DDIHandler) addDNSZone(req *pb.AddDNSZoneRequest) error {
-	return runCommand(h.genDnsCmd("addzone", req.GetZoneName(), "in", req.GetViewName(),
-		"'{ type master; file \""+req.GetZoneFile()+"\";};'"))
+	return runCommand(h.genDnsCmd("addzone", req.GetZone().GetZoneName(), "in", req.GetZone().GetViewName(),
+		"'{ type "+req.GetZone().ZoneRole+
+			"; file \""+req.GetZone().GetZoneFile()+
+			"\"; also-notify {"+req.GetZone().ZoneSlaves+
+			"}; masters {"+req.GetZone().ZoneMasters+"};};'"))
 }
 
 func (h *DDIHandler) updateDNSZone(req *pb.UpdateDNSZoneRequest) error {
-	if err := runCommand(h.genDnsCmd("freeze", req.GetZoneName(), "in", req.GetViewName())); err != nil {
+	if err := runCommand(h.genDnsCmd("freeze",
+		req.GetZone().GetZoneName(), "in", req.GetZone().GetViewName())); err != nil {
 		return err
 	}
-	if err := runCommand(h.genDnsCmd("modzone", req.GetZoneName(), "in", req.GetViewName(),
-		"'{ type master; file \""+req.GetZoneFile()+"\";};'")); err != nil {
+
+	if err := runCommand(h.genDnsCmd("modzone", req.GetZone().GetZoneName(), "in", req.GetZone().GetViewName(),
+		"'{ type "+req.GetZone().ZoneRole+
+			"; file \""+req.GetZone().GetZoneFile()+"\"; also-notify {"+req.GetZone().ZoneSlaves+
+			"}; masters {"+req.GetZone().ZoneMasters+"};};'")); err != nil {
 		return err
 	}
-	return runCommand(h.genDnsCmd("thaw", req.GetZoneName(), "in", req.GetViewName()))
+
+	return runCommand(h.genDnsCmd("thaw", req.GetZone().GetZoneName(), "in", req.GetZone().GetViewName()))
 }
 
 func (h *DDIHandler) deleteDNSZone(req *pb.DeleteDNSZoneRequest) error {
