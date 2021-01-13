@@ -89,11 +89,19 @@ func (h *DDIHandler) reloadDNS() error {
 }
 
 func (h *DDIHandler) addDNSZone(req *pb.AddDNSZoneRequest) error {
-	return runCommand(h.genDnsCmd("addzone", req.GetZoneName(), "in", req.GetViewName(), "'{ type master; file \""+req.GetZoneFile()+"\";};'"))
+	return runCommand(h.genDnsCmd("addzone", req.GetZoneName(), "in", req.GetViewName(),
+		"'{ type master; file \""+req.GetZoneFile()+"\";};'"))
 }
 
 func (h *DDIHandler) updateDNSZone(req *pb.UpdateDNSZoneRequest) error {
-	return runCommand(h.genDnsCmd("modzone", req.GetZoneName(), "in", req.GetViewName(), "'{ type master; file \""+req.GetZoneFile()+"\";};'"))
+	if err := runCommand(h.genDnsCmd("freeze", req.GetZoneName(), "in", req.GetViewName())); err != nil {
+		return err
+	}
+	if err := runCommand(h.genDnsCmd("modzone", req.GetZoneName(), "in", req.GetViewName(),
+		"'{ type master; file \""+req.GetZoneFile()+"\";};'")); err != nil {
+		return err
+	}
+	return runCommand(h.genDnsCmd("thaw", req.GetZoneName(), "in", req.GetViewName()))
 }
 
 func (h *DDIHandler) deleteDNSZone(req *pb.DeleteDNSZoneRequest) error {
@@ -108,6 +116,6 @@ func (h *DDIHandler) dumpDNSZoneConfig(req *pb.DumpDNSZoneConfigRequest) error {
 	return runCommand(h.genDnsCmd("sync -clean", req.GetZoneName(), "in", req.GetViewName()))
 }
 
-func (handler *DDIHandler) reloadNginxConfig() error {
+func (h *DDIHandler) reloadNginxConfig() error {
 	return runCommand(ReloadNginx)
 }
