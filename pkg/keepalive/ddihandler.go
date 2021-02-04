@@ -92,7 +92,8 @@ func (h *DDIHandler) addDNSZone(req *pb.AddDNSZoneRequest) error {
 	return runCommand(h.genDnsCmd("addzone", req.GetZone().GetZoneName(), "in", req.GetZone().GetViewName(),
 		"'{ type "+req.GetZone().ZoneRole+
 			"; file \""+req.GetZone().GetZoneFile()+
-			"\"; also-notify {"+req.GetZone().ZoneSlaves+
+			"\"; allow-transfer {key key"+req.GetZone().GetViewName()+
+			";}; also-notify {"+req.GetZone().ZoneSlaves+
 			"}; masters {"+req.GetZone().ZoneMasters+"};};'"))
 }
 
@@ -104,7 +105,9 @@ func (h *DDIHandler) updateDNSZone(req *pb.UpdateDNSZoneRequest) error {
 
 	if err := runCommand(h.genDnsCmd("modzone", req.GetZone().GetZoneName(), "in", req.GetZone().GetViewName(),
 		"'{ type "+req.GetZone().ZoneRole+
-			"; file \""+req.GetZone().GetZoneFile()+"\"; also-notify {"+req.GetZone().ZoneSlaves+
+			"; file \""+req.GetZone().GetZoneFile()+
+			"\"; allow-transfer {key key"+req.GetZone().GetViewName()+
+			";}; also-notify {"+req.GetZone().ZoneSlaves+
 			"}; masters {"+req.GetZone().ZoneMasters+"};};'")); err != nil {
 		return err
 	}
