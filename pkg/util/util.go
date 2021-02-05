@@ -21,16 +21,9 @@ func GetToken(client *http.Client, controllerAddr string) (string, error) {
 		Password: config.Password,
 	}
 
-	var token string
-	if err := HttpRequest(client, http.MethodPost,
+	return HttpRequest(client, http.MethodPost,
 		fmt.Sprintf("https://%s%s", controllerAddr, "/apis/linkingthing.com/common/v1/getsystemapitoken"),
-		&token, &loginRequest); err != nil {
-		return "", err
-	} else if token == "" {
-		return token, fmt.Errorf("get data failed")
-	}
-
-	return token, nil
+		"", &loginRequest)
 }
 
 func GenControllerRequestUrl(controllerAddr, action, id string) string {
@@ -44,12 +37,12 @@ func GenControllerRequestUrl(controllerAddr, action, id string) string {
 	return builder.String()
 }
 
-func HttpRequest(cli *http.Client, httpMethod, url string, authority *string, req interface{}) error {
+func HttpRequest(cli *http.Client, httpMethod, url, token string, req interface{}) (string, error) {
 	var httpReqBody io.Reader
 	if req != nil {
 		reqBody, err := json.Marshal(req)
 		if err != nil {
-			return fmt.Errorf("marshal request failed: %s", err.Error())
+			return "", fmt.Errorf("marshal request failed: %s", err.Error())
 		}
 
 		httpReqBody = bytes.NewBuffer(reqBody)
@@ -57,28 +50,28 @@ func HttpRequest(cli *http.Client, httpMethod, url string, authority *string, re
 
 	httpReq, err := http.NewRequest(httpMethod, url, httpReqBody)
 	if err != nil {
-		return fmt.Errorf("new http request failed: %s", err.Error())
+		return "", fmt.Errorf("new http request failed: %s", err.Error())
 	}
 
 	httpReq.Header.Set("Content-Type", "application/json")
-	if *authority != "" {
-		httpReq.Header.Set(config.AuthKey, *authority)
+	if token != "" {
+		httpReq.Header.Set(config.AuthKey, token)
 	}
+
 	httpResp, err := cli.Do(httpReq)
 	if err != nil {
-		return fmt.Errorf("send http request failed: %s", err.Error())
+		return "", fmt.Errorf("send http request failed: %s", err.Error())
 	}
 
 	defer httpResp.Body.Close()
 	body, err := ioutil.ReadAll(httpResp.Body)
 	if err != nil {
-		return fmt.Errorf("read http response body failed: %s", err.Error())
+		return "", fmt.Errorf("read http response body failed: %s", err.Error())
 	}
 
 	if httpResp.StatusCode != http.StatusOK {
-		return fmt.Errorf("%s", body)
+		return "", fmt.Errorf("get wrong response with code %v: %s", httpResp.StatusCode, body)
 	}
 
-	*authority = httpResp.Header.Get(config.AuthKey)
-	return nil
+	return httpResp.Header.Get(config.AuthKey), nil
 }

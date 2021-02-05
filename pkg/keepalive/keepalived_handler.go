@@ -123,8 +123,10 @@ func (monitorNode *MonitorNode) notifyController(action string) error {
 		return err
 	}
 
-	return util.HttpRequest(monitorNode.Client, http.MethodPost,
-		util.GenControllerRequestUrl(monitorNode.ControllerAddr, action, monitorNode.ID), &token, &monitorNode)
+	_, err = util.HttpRequest(monitorNode.Client, http.MethodPost,
+		util.GenControllerRequestUrl(monitorNode.ControllerAddr, action, monitorNode.ID),
+		token, monitorNode)
+	return err
 }
 
 func getIpv6sAndMacs() ([]string, []string, error) {

@@ -10,11 +10,12 @@ import (
 )
 
 func Server(conf *config.MonitorConfig) {
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
-	handler.NewHandler(conf)
+	haHandler := handler.NewHandler(conf)
 
-	router.POST("start_ha", handler.StartHa)
-	router.POST("master_up", handler.MasterUp)
-	router.POST("master_down", handler.MasterDown)
+	router.POST("start_ha", haHandler.StartHa)
+	router.POST("master_up", haHandler.MasterUp)
+	router.POST("master_down", haHandler.MasterDown)
 	log.Fatal(router.Run(":" + strconv.Itoa(conf.Server.HaHttpPort)))
 }

@@ -14,7 +14,7 @@ import (
 	"github.com/linkingthing/ddi-monitor/pkg/util"
 )
 
-type Handler struct {
+type HaHandler struct {
 	ControllerAddr string
 	Client         *http.Client
 	DhcpHa         bool
@@ -49,12 +49,11 @@ func (r *HaResponse) Success(msg string) *HaResponse {
 }
 
 var (
-	handler *Handler
 	PgHaCmd = "%s -c %s -m %s -s %s"
 )
 
-func NewHandler(conf *config.MonitorConfig) {
-	handler = &Handler{
+func NewHandler(conf *config.MonitorConfig) *HaHandler {
+	handler := &HaHandler{
 		ControllerAddr: conf.Controller.ApiIp + ":" + strconv.Itoa(conf.Controller.Port),
 		PgHaCliDir:     conf.PgHaCliDir,
 		Vip:            conf.VIP,
@@ -77,9 +76,11 @@ func NewHandler(conf *config.MonitorConfig) {
 			handler.ControllerHa = true
 		}
 	}
+
+	return handler
 }
 
-func StartHa(ctx *gin.Context) {
+func (handler *HaHandler) StartHa(ctx *gin.Context) {
 	var haRequest *HaRequest
 	haResponse := &HaResponse{}
 	if err := ctx.ShouldBindJSON(&haRequest); err != nil {
@@ -98,7 +99,7 @@ func StartHa(ctx *gin.Context) {
 	ctx.Status(http.StatusOK)
 }
 
-func MasterUp(ctx *gin.Context) {
+func (handler *HaHandler) MasterUp(ctx *gin.Context) {
 	var haRequest *HaRequest
 	haResponse := &HaResponse{}
 	if err := ctx.ShouldBindJSON(&haRequest); err != nil {
@@ -121,7 +122,7 @@ func MasterUp(ctx *gin.Context) {
 	}
 
 	haRequest.Vip = handler.Vip
-	if err := notifyController(config.ActionMasterUp, haRequest); err != nil {
+	if err := handler.notifyController(config.ActionMasterUp, haRequest); err != nil {
 		ctx.JSON(http.StatusBadRequest, haResponse.Error(err.Error()))
 		return
 	}
@@ -129,7 +130,7 @@ func MasterUp(ctx *gin.Context) {
 	ctx.Status(http.StatusOK)
 }
 
-func MasterDown(ctx *gin.Context) {
+func (handler *HaHandler) MasterDown(ctx *gin.Context) {
 	var haRequest *HaRequest
 	haResponse := &HaResponse{}
 	if err := ctx.ShouldBindJSON(&haRequest); err != nil {
@@ -151,7 +152,7 @@ func MasterDown(ctx *gin.Context) {
 	}
 
 	haRequest.Vip = handler.Vip
-	if err := notifyController(config.ActionMasterDown, haRequest); err != nil {
+	if err := handler.notifyController(config.ActionMasterDown, haRequest); err != nil {
 		ctx.JSON(http.StatusBadRequest, haResponse.Error(err.Error()))
 		return
 	}
@@ -159,7 +160,7 @@ func MasterDown(ctx *gin.Context) {
 	ctx.Status(http.StatusOK)
 }
 
-func notifyController(action string, haRequest *HaRequest) error {
+func (handler *HaHandler) notifyController(action string, haRequest *HaRequest) error {
 	if handler.ControllerAddr == "" {
 		return nil
 	}
@@ -172,8 +173,10 @@ func notifyController(action string, haRequest *HaRequest) error {
 		token, err = util.GetToken(handler.Client, handler.ControllerAddr)
 	}
 
-	return util.HttpRequest(handler.Client, http.MethodPost,
-		util.GenControllerRequestUrl(handler.ControllerAddr, action, haRequest.MasterIP), &token, haRequest)
+	_, err = util.HttpRequest(handler.Client, http.MethodPost,
+		util.GenControllerRequestUrl(handler.ControllerAddr, action, haRequest.MasterIP),
+		token, haRequest)
+	return err
 }
 
 func runCommand(cmdline string) error {
