@@ -3,6 +3,7 @@ package keepalive
 import (
 	"crypto/tls"
 	"fmt"
+	"net"
 	"net/http"
 	"strconv"
 	"time"
@@ -28,6 +29,8 @@ type MonitorNode struct {
 	StartTime      time.Time    `json:"startTime"`
 	UpdateTime     time.Time    `json:"updateTime"`
 	Vip            string       `json:"vip"`
+	Ipv6s          []string     `json:"ipv6s"`
+	Macs           []string     `json:"macs"`
 }
 
 func NewMonitorNode(conf *config.MonitorConfig) error {
@@ -53,6 +56,12 @@ func NewMonitorNode(conf *config.MonitorConfig) error {
 		Vip:          conf.VIP,
 	}
 
+	ipv6s, macs, err := getIpv6sAndMacs()
+	if err != nil {
+		return err
+	}
+	monitorNode.Ipv6s = ipv6s
+	monitorNode.Macs = macs
 	if err := monitorNode.registerNode(); err != nil {
 		return err
 	}
@@ -116,4 +125,41 @@ func (monitorNode *MonitorNode) notifyController(action string) error {
 
 	return util.HttpRequest(monitorNode.Client, http.MethodPost,
 		util.GenControllerRequestUrl(monitorNode.ControllerAddr, action, monitorNode.ID), &token, &monitorNode)
+}
+
+func getIpv6sAndMacs() ([]string, []string, error) {
+	var ipv6s []string
+	var macs []string
+	its, err := net.Interfaces()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	for _, it := range its {
+		addresses, err := it.Addrs()
+		if err != nil {
+			continue
+		}
+
+		find := false
+		for _, addr := range addresses {
+			ipNet, ok := addr.(*net.IPNet)
+			if ok == false {
+				continue
+			}
+
+			if ip := ipNet.IP; ip.To4() == nil {
+				if ip.IsGlobalUnicast() || ip.IsLinkLocalUnicast() {
+					find = true
+					ipv6s = append(ipv6s, ip.String())
+				}
+			}
+		}
+
+		if find {
+			macs = append(macs, it.HardwareAddr.String())
+		}
+	}
+
+	return ipv6s, macs, nil
 }
