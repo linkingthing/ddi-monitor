@@ -61,7 +61,8 @@ func NewHandler(conf *config.MonitorConfig) {
 		Client: &http.Client{
 			Timeout: 10 * time.Second,
 			Transport: &http.Transport{
-				TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+				TLSClientConfig:   &tls.Config{InsecureSkipVerify: true},
+				DisableKeepAlives: true,
 			},
 		},
 	}
